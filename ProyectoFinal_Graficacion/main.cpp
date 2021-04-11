@@ -12,6 +12,7 @@
 
 #define WIDTH 960
 #define HEIGHT 480
+#include "Camara.hpp"
 
 using namespace std;
 
@@ -20,15 +21,19 @@ float FOVY=60.0;
 float ZNEAR=0.01;
 float ZFAR=50.0;
 
-float EYE_X=15.0;
-float EYE_Y=15.0;
-float EYE_Z=15.0;
+float EYE_X=0.0;
+float EYE_Y=0.0;
+float EYE_Z=-10.0;
 float CENTER_X=0;
 float CENTER_Y=0;
 float CENTER_Z=0;
 float UP_X=0;
 float UP_Y=1;
 float UP_Z=0;
+//Direction vector
+float DIR_X = 0.0f;
+float DIR_Y = 0.0f;
+float DIR_Z = 1.0f;
 //Variables para dibujar los ejes del sistema
 float X_MIN=-50;
 float X_MAX=50;
@@ -36,22 +41,10 @@ float Y_MIN=-50;
 float Y_MAX=50;
 float Z_MIN=-50;
 float Z_MAX=50;
-//Variables para matrices de rotacion y traslación
-float Theta=0;
-//float Radio=1.0;
-float PI = 3.14159265359;
-float Direction[3] = {0.1,0.0,0.0};
 
-
-float RadToDeg(float r)
-{
-      return ((180.0*r)/PI);
-}
-
-float DegToRad(float g)
-{
-      return ((g*PI)/180.0);
-}
+Camara camara(EYE_X,EYE_Y,EYE_Z,
+              CENTER_X,CENTER_Y,CENTER_Z,
+              DIR_X,DIR_Y,DIR_Z,1.0f);
 
 void drawAxis()
 {
@@ -89,48 +82,23 @@ void init()
     gluLookAt(EYE_X,EYE_Y,EYE_Z,CENTER_X,CENTER_Y,CENTER_Z,UP_X,UP_Y,UP_Z);
 }
 
-void LookAt()
-{
-    Direction[0] = cos(DegToRad(Theta));
-    Direction[2] = sin(DegToRad(Theta));
-    CENTER_X = EYE_X + Direction[0];
-    CENTER_Z = EYE_Z + Direction[2];
-}
-
 void SpecialInput(int key, int x, int y)
 {
     switch(key){
                 case GLUT_KEY_UP:
-                     EYE_X += Direction[0];
-                     EYE_Y += Direction[1];
-                     EYE_Z += Direction[2];
-                     CENTER_X = EYE_X + Direction[0];
-                     CENTER_Y = EYE_Y + Direction[1];
-                     CENTER_Z = EYE_Z + Direction[2];
+                     camara.moveForward();
                      break;
                 case GLUT_KEY_DOWN:
-                     EYE_X -= Direction[0];
-                     EYE_Y -= Direction[1];
-                     EYE_Z -= Direction[2];
-                     CENTER_X = EYE_X + Direction[0];
-                     CENTER_Y = EYE_Y + Direction[1];
-                     CENTER_Z = EYE_Z + Direction[2];
+                     camara.moveBackward();
+                     break;
+                case GLUT_KEY_RIGHT:
+                     camara.moveRight();
                      break;
                 case GLUT_KEY_LEFT:
-                     Theta -= 1.0f;
-                     Theta = (Theta < 0.0) ? 359.0 : Theta;
-                     LookAt();
-                      break;
-                case GLUT_KEY_RIGHT:
-                     Theta += 1.0f;
-                     Theta = (Theta > 359.0) ? 0.0 : Theta;
-                     LookAt();
+                     camara.moveLeft();
                      break;
     }
-
-    glLoadIdentity();
-    gluLookAt(EYE_X,EYE_Y,EYE_Z,CENTER_X,CENTER_Y,CENTER_Z,UP_X,UP_Y,UP_Z);
-    glutPostRedisplay();
+    camara.colocar();
 }
 
 float anguloSun = 0.0f;
