@@ -13,17 +13,21 @@ class Camara
         float centerX, centerY, centerZ;
         float dirX, dirY, dirZ;
         float upX, upY, upZ;
-        float magnitude;
+        float s_magnitude, r_magnitude;
         float theta;
 
         void updateCenter();
         void specialUpdateCenter();
     public:
-        Camara(float, float, float, float, float, float, float, float, float, float);
+        Camara(float, float, float, float, float, float, float, float, float, float, float);
         Camara();
         ~Camara();
 
         float degToRad(float);
+        float radToDeg(float);
+        float returnAngle(float,float);
+
+        void set(float, float, float, float, float, float, float, float, float);
         void setEyeX(float);
         void setEyeY(float);
         void setEyeZ(float);//I don't really think we'll use methods for the Y axis
@@ -36,7 +40,8 @@ class Camara
         void setDirY(float);
         void setDirZ(float);
         void setDir(float, float, float);
-        void setMagnitude(float);
+        void setStepMagnitude(float);
+        void setRotMagnitude(float);
 
         float getEyeX();
         float getEyeY();
@@ -47,13 +52,14 @@ class Camara
         float getDirX();
         float getDirY();
         float getDirZ();
-        float getMagnitude();
+        float getStepMagnitude();
+        float getRotMagnitude();
 
         void moveForward();
         void moveBackward();
         void moveRight();
         void moveLeft();
-        void colocar();
+        void display();
 };
 
 #endif // CAMARA_HPP

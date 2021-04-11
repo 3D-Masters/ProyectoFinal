@@ -12,7 +12,7 @@
 
 #define WIDTH 960
 #define HEIGHT 480
-#include "Camara.hpp"
+#include "src/Camara.hpp"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ float ZNEAR=0.01;
 float ZFAR=50.0;
 
 float EYE_X=0.0;
-float EYE_Y=0.0;
+float EYE_Y=1.0;
 float EYE_Z=-10.0;
 float CENTER_X=0;
 float CENTER_Y=0;
@@ -31,9 +31,9 @@ float UP_X=0;
 float UP_Y=1;
 float UP_Z=0;
 //Direction vector
-float DIR_X = 0.0f;
+float DIR_X = -1.0f;
 float DIR_Y = 0.0f;
-float DIR_Z = 1.0f;
+float DIR_Z = -0.5f;
 //Variables para dibujar los ejes del sistema
 float X_MIN=-50;
 float X_MAX=50;
@@ -43,8 +43,8 @@ float Z_MIN=-50;
 float Z_MAX=50;
 
 Camara camara(EYE_X,EYE_Y,EYE_Z,
-              CENTER_X,CENTER_Y,CENTER_Z,
-              DIR_X,DIR_Y,DIR_Z,1.0f);
+              DIR_X,DIR_Y,DIR_Z,
+              UP_X,UP_Y,UP_Z,1.0f,3.0f);
 
 void drawAxis()
 {
@@ -79,7 +79,10 @@ void init()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glEnable(GL_DEPTH_TEST);
-    gluLookAt(EYE_X,EYE_Y,EYE_Z,CENTER_X,CENTER_Y,CENTER_Z,UP_X,UP_Y,UP_Z);
+    camara.display();
+    //gluLookAt(EYE_X,EYE_Y,EYE_Z,CENTER_X,CENTER_Y,CENTER_Z,UP_X,UP_Y,UP_Z);
+
+    //glutIgnoreKeyRepeat(1);
 }
 
 void SpecialInput(int key, int x, int y)
@@ -98,7 +101,9 @@ void SpecialInput(int key, int x, int y)
                      camara.moveLeft();
                      break;
     }
-    camara.colocar();
+    glLoadIdentity();
+    camara.display();
+    glutPostRedisplay();
 }
 
 float anguloSun = 0.0f;

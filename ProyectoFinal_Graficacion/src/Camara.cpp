@@ -1,30 +1,20 @@
 #include "Camara.hpp"
+#include <iostream>
 
 Camara::Camara( float eyeX, float eyeY, float eyeZ,
-                float centerX, float centerY, float centerZ,
                 float dirX, float dirY, float dirZ,
-                float m)
+                float upX, float upY, float upZ,
+                float step, float rots)
 {
-    this->eyeX = eyeX; this->eyeY = eyeY; this->eyeZ = eyeZ;
-    this->centerX = centerX; this->centerY = centerY; this->centerZ = centerZ;
-    this->dirX = dirX; this->dirY = dirY; this->dirZ = dirZ;
-    upX = 0.0f; upY = 1.0f; upZ = 0.0f;
-    magnitude = m;
-    theta = 0.0f;
+    set(eyeX,eyeY,eyeZ,dirX,dirY,dirZ,upX,upY,upZ);
+    s_magnitude = step;
+    r_magnitude = rots;
 }
 
 Camara::Camara()
 {
-    eyeX = eyeY = eyeZ = 0.0f;
-    centerX = centerY = centerZ = 0.0f;
-    dirX = dirY = dirZ = 0.0f;
-    upX = 0.0f; upY = 1.0f; upZ = 0.0f;
-    /*
-    dirX = 1.0f;
-    dirY = dirZ = 0.0f
-    */
-    magnitude = 1.0f;
-    theta = 0.0f;
+    set(0.0f,0.0f,0.0f,0.0f,0.0f,1.0f,0.0f,1.0f,0.0f);
+    s_magnitude = r_magnitude = 1.0f;
 }
 
 Camara::~Camara(){}
@@ -39,35 +29,62 @@ void Camara::updateCenter()
 
 void Camara::specialUpdateCenter()
 {
-    theta = degToRad(theta);
-
+    float rads = degToRad(theta);
+    std::cout << theta << std::endl;
 
     //Directions must be included just in case one of them is (-1)
-
-    dirX = (std::cos(theta) * dirX) + (std::sin(theta) * dirZ);
-    dirZ = (std::sin(theta) * dirX) + (std::cos(theta) * dirZ);
+    dirX = cos(rads);
+    dirZ = sin(rads);
     centerX = eyeX + dirX;
     centerZ = eyeZ + dirZ;
-
-
-    /*
-    dirX = cos(theta);
-    dirZ = sin(theta);
-    centerX = eyeX + dirX;
-    centerZ = eyeZ + dirZ;
-    */
 }
 
 float Camara::degToRad(float degrees)
 {
-      return ((degrees*PI_)/180.0f);
+      return ((degrees*M_PI)/180.0f);
+}
+
+float Camara::radToDeg(float radians)
+{
+      return (radians*180.0f/M_PI);
+}
+
+float Camara::returnAngle(float dirX, float dirZ)
+{
+    if(dirX != 0.0f)
+    {
+        if(dirX > 0.0f && dirZ >= 0.0f)                 // Cuadrante 1
+            theta = radToDeg(atan(dirZ/dirX));
+        else if(dirX < 0.0f)                            // Cuadrante 2 & 3
+            theta = 180.0f+radToDeg(atan(dirZ/dirX));
+        else if(dirX > 0.0f && dirZ < 0.0f)             // Cuadrante 4
+            theta = 360.0f+radToDeg(atan(dirZ/dirX));
+    }
+    else
+    {
+        theta = (dirZ >= 0.0f ? 90 : 270);
+    }
+
+    return theta;
+}
+
+void Camara::set(float eyeX, float eyeY, float eyeZ,
+                 float dirX, float dirY, float dirZ,
+                 float upX, float upY, float upZ)
+{
+    this->eyeX = eyeX; this->eyeY = eyeY; this->eyeZ = eyeZ;
+    this->dirX = dirX; this->dirY = dirY; this->dirZ = dirZ;
+    centerX = eyeX + dirX; centerY = eyeY + dirY; centerZ = eyeZ + dirZ;
+    this->upX = upX; this->upY = upY; this->upZ = upZ;
+
+    theta = returnAngle(dirX,dirZ);
+    //std::cout << theta << std::endl;
 }
 
 /*
 I think that the center has to update every time we
 update the eye, but just for the specified axis.
 */
-
 void Camara::setEyeX(float eyeX)
 {
     this->eyeX = eyeX;
@@ -92,32 +109,6 @@ void Camara::setEye(float eyeX, float eyeY, float eyeZ)
     updateCenter();
 }
 
-
-/*
-If the center (observation point) is changed, then the
-direction must also change so the camera can move towards
-its direction.
-*************Scratch this, I don't think this has to be
-implemented xd
-
-void Camara::setCenterX(float centerX)
-{
-    this->centerX = centerX;
-    //update dir
-}
-
-void Camara::setCenterY(float centerY)
-{
-    this->centerY = centerY;
-}
-
-void Camara::setCenterZ(float centerY)
-{
-    this->centerZ = centerZ;
-}
-
-void Camara::setCenter(float CenterX, float centerY, float centerZ){}
-*/
 
 /*
 If the direction is updated, then the center must also be updated to make
@@ -148,9 +139,14 @@ void Camara::setDir(float dirX, float dirY, float dirZ)
     updateCenter();
 }
 
-void Camara::setMagnitude(float m)
+void Camara::setStepMagnitude(float m)
 {
-    magnitude = m;
+    s_magnitude = m;
+}
+
+void Camara::setRotMagnitude(float m)
+{
+    r_magnitude = m;
 }
 
 float Camara::getEyeX(){return eyeX;}
@@ -165,43 +161,42 @@ float Camara::getDirX(){return dirX;}
 float Camara::getDirY(){return dirY;}
 float Camara::getDirZ(){return dirZ;}
 
-float Camara::getMagnitude(){return magnitude;}
+float Camara::getStepMagnitude(){return s_magnitude;}
+float Camara::getRotMagnitude(){return r_magnitude;}
 
 void Camara::moveForward()
 {
-    eyeX += (magnitude * dirX);
-    eyeY += (magnitude * dirY);
-    eyeZ += (magnitude * dirZ);
+    eyeX += (s_magnitude * dirX);
+    eyeY += (s_magnitude * dirY);
+    eyeZ += (s_magnitude * dirZ);
     updateCenter();
 }
 
 void Camara::moveBackward()
 {
-    eyeX -= (magnitude * dirX);
-    eyeY -= (magnitude * dirY);
-    eyeZ -= (magnitude * dirZ);
+    eyeX -= (s_magnitude * dirX);
+    eyeY -= (s_magnitude * dirY);
+    eyeZ -= (s_magnitude * dirZ);
     updateCenter();
 }
 
 void Camara::moveLeft()
 {
-    theta -= 1.0f;
-    theta = (theta < 0.0) ? 359.0 : theta;
+    theta -= r_magnitude;
+    //std::cout << theta << std::endl;
+    theta = (theta < 0.0f) ? theta+360.0f : theta;
     specialUpdateCenter();
 }
-
 
 void Camara::moveRight()
 {
-    theta += 1.0f;
-    theta = (theta > 359.0) ? 0.0 : theta;
+    theta += r_magnitude;
+    //std::cout << theta << std::endl;
+    theta = (theta >= 360.0f) ? theta-360.0f : theta;
     specialUpdateCenter();
 }
 
-
-void Camara::colocar()
+void Camara::display()
 {
-    glLoadIdentity();//should this be here?
     gluLookAt(eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ);
-    glutPostRedisplay();//should this be here?
 }
