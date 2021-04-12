@@ -14,6 +14,8 @@
 #define HEIGHT 480
 #include "src/Camara.hpp"
 
+/*PRUEBA*/ #include "src/Model.hpp"
+
 using namespace std;
 
 //Variables para establecer los valores de gluPerspective
@@ -41,6 +43,8 @@ float Y_MIN=-50;
 float Y_MAX=50;
 float Z_MIN=-50;
 float Z_MAX=50;
+
+ModelX mx; //modeloX
 
 Camara camara(EYE_X,EYE_Y,EYE_Z,
               DIR_X,DIR_Y,DIR_Z,
@@ -192,6 +196,7 @@ void display()
     glPushMatrix();
 
     glPushMatrix();
+    mx.draw();
     glScalef(scaleVar,scaleVar,scaleVar);
     glRotatef(120,0.0f,1.0f,0.0f);
     TheSun();
@@ -202,6 +207,7 @@ void display()
 
     glutSwapBuffers();
     update();
+    mx.update();
 }
 
 

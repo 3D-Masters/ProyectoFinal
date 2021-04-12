@@ -2,29 +2,50 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="src\Camara.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Carro.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10" topLine="105" />
+			<Cursor1 position="358" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Carro.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1429" topLine="0" />
+			<Cursor1 position="4277" topLine="74" />
+		</Cursor>
+		<Folding>
+			<Collapse line="53" />
+			<Collapse line="92" />
+			<Collapse line="119" />
+			<Collapse line="134" />
+			<Collapse line="176" />
+		</Folding>
+	</File>
+	<File name="src\Model.hpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="174" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Camara.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Camara.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="352" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Carro.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1386" topLine="0" />
+			<Cursor1 position="637" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Camara.hpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1481" topLine="57" />
+			<Cursor1 position="0" topLine="6" />
 		</Cursor>
+	</File>
+	<File name="src\Model.cpp" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1474" topLine="11" />
+		</Cursor>
+		<Folding>
+			<Collapse line="9" />
+			<Collapse line="97" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>
