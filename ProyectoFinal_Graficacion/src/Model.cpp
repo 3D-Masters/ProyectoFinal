@@ -8,9 +8,9 @@ ModelX::~ModelX(){}
 
 void ModelX::drawBase()
 {
-     glPushMatrix();
+    glPushMatrix();
     glColor3f(1.0f,1.0f,0.0f);//naranja xd
-    glRotatef(ang,0.0f,1.0,1.0);        //PRUEBA
+    //glRotatef(ang,0.0f,1.0,1.0);        //PRUEBA
     glBegin(GL_QUADS);
     /*=======BASE AUTO=======*/
     //front
@@ -47,14 +47,14 @@ void ModelX::drawBase()
 	glEnd();
     glPopMatrix();
     //dibujandoLlantas
-    glPushMatrix();
+    //glPushMatrix();
 
 }
 void ModelX::drawUp()
 {
     glPushMatrix();
     glColor3f(1.0f,0.0f,0.0f);
-    glRotatef(ang,0.0f,1.0f,1.0f);
+    //glRotatef(ang,0.0f,1.0f,1.0f);
     glBegin(GL_QUADS);
     /*=====PARTE SUPERIOR=====*/
     //front
@@ -98,6 +98,12 @@ void ModelX::draw()
 {
     //Dibujando el auto de forma solida
     glPushMatrix();
+
+    // Estas funciones permiten posicionar al carro en su lugar
+    glTranslatef(posX,posY,posZ);
+    glRotatef(direction,0,-1,0);
+
+    glPushMatrix();
         drawBase();
         drawUp();
         //dibujando las llantas
@@ -124,14 +130,11 @@ void ModelX::draw()
 
     glPopMatrix();
 
+    glPopMatrix();
 }
 void ModelX::update()
 {
     ang+=0.2f;                          //PRUEBA
-}
-void ModelX::move(int x, int y, int z)
-{
-
 }
 
 //Model Y
@@ -146,10 +149,6 @@ void ModelY::draw()
 
 }
 void ModelY::update()
-{
-
-}
-void ModelY::move(int x, int y, int z)
 {
 
 }

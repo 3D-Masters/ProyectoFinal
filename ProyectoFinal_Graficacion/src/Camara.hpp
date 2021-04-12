@@ -4,6 +4,7 @@
 
 #include <math.h>
 #include <GL/glut.h>
+#include "../util/Utilities.hpp"
 
 
 class Camara
@@ -22,10 +23,6 @@ class Camara
         Camara(float, float, float, float, float, float, float, float, float, float, float);
         Camara();
         ~Camara();
-
-        float degToRad(float);
-        float radToDeg(float);
-        float returnAngle(float,float);
 
         void set(float, float, float, float, float, float, float, float, float);
         void setEyeX(float);

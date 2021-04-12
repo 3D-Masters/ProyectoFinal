@@ -24,7 +24,7 @@ float ZNEAR=0.01;
 float ZFAR=50.0;
 
 float EYE_X=0.0;
-float EYE_Y=1.0;
+float EYE_Y=0.0;
 float EYE_Z=-10.0;
 float CENTER_X=0;
 float CENTER_Y=0;
@@ -33,9 +33,9 @@ float UP_X=0;
 float UP_Y=1;
 float UP_Z=0;
 //Direction vector
-float DIR_X = -1.0f;
+float DIR_X = 0.0f;
 float DIR_Y = 0.0f;
-float DIR_Z = -0.5f;
+float DIR_Z = 1.0f;
 //Variables para dibujar los ejes del sistema
 float X_MIN=-50;
 float X_MAX=50;
@@ -45,10 +45,16 @@ float Z_MIN=-50;
 float Z_MAX=50;
 
 ModelX mx; //modeloX
+bool arrows[] = {
+    false,  // UP
+    false,  // DOWN
+    false,  // RIGHT
+    false   // LEFT
+};
 
 Camara camara(EYE_X,EYE_Y,EYE_Z,
               DIR_X,DIR_Y,DIR_Z,
-              UP_X,UP_Y,UP_Z,1.0f,3.0f);
+              UP_X,UP_Y,UP_Z,0.75f,1.5f);
 
 void drawAxis()
 {
@@ -83,31 +89,76 @@ void init()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glEnable(GL_DEPTH_TEST);
+    mx.setDirectionVector(DIR_X,DIR_Y,DIR_Z);
+    mx.setPositionPoint(EYE_X,EYE_Y,EYE_Z);
     camara.display();
-    //gluLookAt(EYE_X,EYE_Y,EYE_Z,CENTER_X,CENTER_Y,CENTER_Z,UP_X,UP_Y,UP_Z);
 
-    //glutIgnoreKeyRepeat(1);
+    glutIgnoreKeyRepeat(true);
 }
 
 void SpecialInput(int key, int x, int y)
 {
     switch(key){
-                case GLUT_KEY_UP:
-                     camara.moveForward();
-                     break;
-                case GLUT_KEY_DOWN:
-                     camara.moveBackward();
-                     break;
-                case GLUT_KEY_RIGHT:
-                     camara.moveRight();
-                     break;
-                case GLUT_KEY_LEFT:
-                     camara.moveLeft();
-                     break;
+        case GLUT_KEY_UP:
+             arrows[0] = true;
+             break;
+        case GLUT_KEY_DOWN:
+             arrows[1] = true;
+             break;
+        case GLUT_KEY_RIGHT:
+             arrows[2] = true;
+             break;
+        case GLUT_KEY_LEFT:
+             arrows[3] = true;
+             break;
     }
+    //std::cout << "yes" << std::endl;
+}
+
+void SpecialUpInput(int key, int x, int y)
+{
+    switch(key){
+        case GLUT_KEY_UP:
+             arrows[0] = false;
+             break;
+        case GLUT_KEY_DOWN:
+             arrows[1] = false;
+             break;
+        case GLUT_KEY_RIGHT:
+             arrows[2] = false;
+             break;
+        case GLUT_KEY_LEFT:
+             arrows[3] = false;
+             break;
+    }
+    //std::cout << "no" << std::endl;
+}
+
+void updateMovement()
+{
+    if(arrows[0])   // UP
+        mx.moveForward();
+    if(arrows[1])   // DOWN
+        mx.moveBackward();
+    if(arrows[2])   // RIGTH
+        mx.moveRight();
+    if(arrows[3])   // LEFT
+        mx.moveLeft();
+
     glLoadIdentity();
+    camara.set(
+        mx.getPosX(),
+        mx.getPosY()+0.75f,
+        mx.getPosZ(),
+        mx.getDirX(),
+        mx.getDirY()-0.10,
+        mx.getDirZ(),
+        0.0f,1.0f,0.0f
+    );
+    camara.moveBackward();
+    camara.moveBackward();
+    camara.moveBackward();
     camara.display();
-    glutPostRedisplay();
 }
 
 float anguloSun = 0.0f;
@@ -192,7 +243,11 @@ void update()
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    updateMovement();   // Se realiza aquí para que reaccione al instante en la escena.
+
     drawAxis();
+
     glPushMatrix();
 
     glPushMatrix();
@@ -206,8 +261,9 @@ void display()
     glPopMatrix();
 
     glutSwapBuffers();
+
     update();
-    mx.update();
+    //mx.update();
 }
 
 
@@ -222,6 +278,7 @@ int main(int argc, char **argv)
     glutDisplayFunc(display);
     glutIdleFunc(display);
     glutSpecialFunc(SpecialInput);
+    glutSpecialUpFunc(SpecialUpInput);
     glutMainLoop();
 
     return 0;

@@ -1,5 +1,4 @@
 #include "Camara.hpp"
-#include <iostream>
 
 Camara::Camara( float eyeX, float eyeY, float eyeZ,
                 float dirX, float dirY, float dirZ,
@@ -29,43 +28,14 @@ void Camara::updateCenter()
 
 void Camara::specialUpdateCenter()
 {
-    float rads = degToRad(theta);
-    std::cout << theta << std::endl;
+    float rads = Util::degToRad(theta);
+    //std::cout << theta << std::endl;
 
     //Directions must be included just in case one of them is (-1)
     dirX = cos(rads);
     dirZ = sin(rads);
     centerX = eyeX + dirX;
     centerZ = eyeZ + dirZ;
-}
-
-float Camara::degToRad(float degrees)
-{
-      return ((degrees*M_PI)/180.0f);
-}
-
-float Camara::radToDeg(float radians)
-{
-      return (radians*180.0f/M_PI);
-}
-
-float Camara::returnAngle(float dirX, float dirZ)
-{
-    if(dirX != 0.0f)
-    {
-        if(dirX > 0.0f && dirZ >= 0.0f)                 // Cuadrante 1
-            theta = radToDeg(atan(dirZ/dirX));
-        else if(dirX < 0.0f)                            // Cuadrante 2 & 3
-            theta = 180.0f+radToDeg(atan(dirZ/dirX));
-        else if(dirX > 0.0f && dirZ < 0.0f)             // Cuadrante 4
-            theta = 360.0f+radToDeg(atan(dirZ/dirX));
-    }
-    else
-    {
-        theta = (dirZ >= 0.0f ? 90 : 270);
-    }
-
-    return theta;
 }
 
 void Camara::set(float eyeX, float eyeY, float eyeZ,
@@ -77,7 +47,7 @@ void Camara::set(float eyeX, float eyeY, float eyeZ,
     centerX = eyeX + dirX; centerY = eyeY + dirY; centerZ = eyeZ + dirZ;
     this->upX = upX; this->upY = upY; this->upZ = upZ;
 
-    theta = returnAngle(dirX,dirZ);
+    theta = Util::getAngle(dirX,dirZ);
     //std::cout << theta << std::endl;
 }
 
@@ -108,7 +78,6 @@ void Camara::setEye(float eyeX, float eyeY, float eyeZ)
     this->eyeX = eyeX; this->eyeY = eyeY; this->eyeZ = eyeZ;
     updateCenter();
 }
-
 
 /*
 If the direction is updated, then the center must also be updated to make

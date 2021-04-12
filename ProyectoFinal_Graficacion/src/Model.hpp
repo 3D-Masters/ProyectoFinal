@@ -15,7 +15,6 @@ class ModelX:public Carro
         ~ModelX();
         void draw();
         void update();
-        void move(int,int,int);
 };
 class ModelY:public Carro
 {
@@ -24,7 +23,6 @@ class ModelY:public Carro
         ~ModelY();
         void draw();
         void update();
-        void move(int,int,int);
 };
 
 #endif // MODEL_HPP_INCLUDED
