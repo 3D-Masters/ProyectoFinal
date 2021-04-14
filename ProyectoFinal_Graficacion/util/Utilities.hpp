@@ -9,6 +9,7 @@ class Util
         static float degToRad(float);
         static float radToDeg(float);
         static float getAngle(float,float);
+        static float pointDistance(float, float, float, float, float ,float);
 };
 
 #endif // UTILITIES_HPP_INCLUDED

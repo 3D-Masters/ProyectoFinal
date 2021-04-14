@@ -8,6 +8,7 @@
 #endif
 
 #include "../util/Utilities.hpp"
+#include "BoundingSphere.hpp"
 
 class Carro
 {
@@ -17,6 +18,7 @@ class Carro
         float direction;        // angle of direction
         float s_magnitude;      // step magnitude
         float r_magnitude;      // rotation magnitude
+        BoundingSphere *boundingSpere;
         // Maybe is missing a collision variable or something... even textures!
         // ...
 

@@ -15,6 +15,7 @@
 #include "src/Camara.hpp"
 
 /*PRUEBA*/ #include "src/Model.hpp"
+#include "BoundingSphere.hpp"
 
 using namespace std;
 
@@ -37,12 +38,12 @@ float DIR_X = 0.0f;
 float DIR_Y = 0.0f;
 float DIR_Z = 1.0f;
 //Variables para dibujar los ejes del sistema
-float X_MIN=-50;
-float X_MAX=50;
-float Y_MIN=-50;
-float Y_MAX=50;
-float Z_MIN=-50;
-float Z_MAX=50;
+float X_MIN=-500;
+float X_MAX=500;
+float Y_MIN=-500;
+float Y_MAX=500;
+float Z_MIN=-500;
+float Z_MAX=500;
 
 ModelX mx; //modeloX
 bool arrows[] = {
@@ -56,6 +57,7 @@ Camara camara(EYE_X,EYE_Y,EYE_Z,
               DIR_X,DIR_Y,DIR_Z,
               UP_X,UP_Y,UP_Z,0.75f,1.5f);
 
+BoundingSphere sunBoundingSphere(0.0f,0.0f,0.0f,1.0f);
 void drawAxis()
 {
      //X axis in red
@@ -264,6 +266,7 @@ void display()
 
     update();
     //mx.update();
+    Sleep(10);
 }
 
 
