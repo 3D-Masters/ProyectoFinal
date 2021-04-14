@@ -18,10 +18,11 @@ class Carro
         float direction;        // angle of direction
         float s_magnitude;      // step magnitude
         float r_magnitude;      // rotation magnitude
-        BoundingSphere *boundingSpere;
+
+        bool isColliding;
+        BoundingSphere *boundingSpere;//The objects bounding sphere---UPDATE TO INCLUDE IN CONSTRUCTOR
         // Maybe is missing a collision variable or something... even textures!
         // ...
-
         void updateDirectionAngle();
         void updateDirection();
     public:
@@ -48,6 +49,8 @@ class Carro
         void setRotMagnitude(float);
         float getRotMagnitude();
         float getDirection();
+
+        void checkCollisions(); //NEW XD CHECK INTEGRATION
 
         virtual void draw() = 0;    // Función específica para dibujarlo
         virtual void update() = 0;  // Esto es específico para las animaciones que tenga.

@@ -57,6 +57,7 @@ Camara camara(EYE_X,EYE_Y,EYE_Z,
               DIR_X,DIR_Y,DIR_Z,
               UP_X,UP_Y,UP_Z,0.75f,1.5f);
 
+//how do we update its variables like we did in Parcial2 in "aplicar"?
 BoundingSphere sunBoundingSphere(0.0f,0.0f,0.0f,1.0f);
 void drawAxis()
 {

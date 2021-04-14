@@ -10,6 +10,8 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
 
     updateDirectionAngle();
 
+    isColliding = false;
+
     // ...
 }
 
@@ -21,6 +23,7 @@ Carro::Carro()
     r_magnitude = 2.5f;
 
     updateDirectionAngle();
+    isColliding = false;
 }
 
 Carro::~Carro(){}
@@ -53,6 +56,25 @@ void Carro::setRotMagnitude(float m){r_magnitude = m;}
 float Carro::getRotMagnitude(){return r_magnitude;}
 float Carro::getDirection(){return direction;}
 
+/*
+//should we only check if this player object is colliding with
+//other objects? Or do we check every object with every other
+//object?
+void Carro::checkCollisions(BoundingSphere* spheres, int sizeN)
+{
+    for(int i = 0; i < sizeN; i++)
+    {
+        //At the moment, boundingSphere hasn't been instantiated
+        //but to checkCollisions is should be something like the
+        //following
+        isColliding = boundingSpere.isColliding(spheres[i]);
+    }
+}
+*/
+
+
+//The following should only be executed if isColliding is false
+//if(!isColliding)
 void Carro::moveForward()
 {
     posX += (s_magnitude * dirX);
