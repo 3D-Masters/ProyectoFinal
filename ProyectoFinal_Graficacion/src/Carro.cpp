@@ -5,12 +5,13 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
 {
     posX = x;   posY = y;   posZ = z;
     dirX = dx;  dirY = dy;  dirZ = dz;
+    tX = x;   tY = y;   tZ = z;
     s_magnitude = step;
     r_magnitude = rot;
 
     updateDirectionAngle();
 
-    isColliding = false;
+    boundingSphere = new BoundingSphere(&posX,&posY,&posZ,1.1,BOUNDS_KART);
 
     // ...
 }
@@ -23,18 +24,23 @@ Carro::Carro()
     r_magnitude = 2.5f;
 
     updateDirectionAngle();
-    isColliding = false;
+
+    boundingSphere = new BoundingSphere(&posX,&posY,&posZ,1.1,BOUNDS_KART);
 }
 
-Carro::~Carro(){}
+Carro::~Carro()
+{
+    delete boundingSphere;
+}
 
 void Carro::setPositionPoint(float x, float y, float z)
 {
     posX = x;   posY = y;   posZ = z;
+    tX = x;   tY = y;   tZ = z;
 }
-void Carro::setPosX(float x){posX = x;}
-void Carro::setPosY(float y){posY = y;}
-void Carro::setPosZ(float z){posZ = z;}
+void Carro::setPosX(float x){posX = x; tX = x;}
+void Carro::setPosY(float y){posY = y; tY = y;}
+void Carro::setPosZ(float z){posZ = z; tZ = z;}
 float Carro::getPosX(){return posX;}
 float Carro::getPosY(){return posY;}
 float Carro::getPosZ(){return posZ;}
@@ -56,27 +62,32 @@ void Carro::setRotMagnitude(float m){r_magnitude = m;}
 float Carro::getRotMagnitude(){return r_magnitude;}
 float Carro::getDirection(){return direction;}
 
-/*
-//should we only check if this player object is colliding with
-//other objects? Or do we check every object with every other
-//object?
-void Carro::checkCollisions(BoundingSphere* spheres, int sizeN)
+void Carro::handleCollisions(BoundingSphere* spheres, int sizeN)
 {
+    int value;
+
     for(int i = 0; i < sizeN; i++)
     {
-        //At the moment, boundingSphere hasn't been instantiated
-        //but to checkCollisions is should be something like the
-        //following
-        isColliding = boundingSpere.isColliding(spheres[i]);
+        value = boundingSphere->isColliding(spheres[i]);
+        if(BoundingSphere::isWall(value))
+        {
+            moveRewind();
+            std::cout << "Collision with Wall" << std::endl;
+        }
+        else if(BoundingSphere::isKart(value))
+        {
+            // rotar, mover, explotar
+            std::cout << "Collision with Kart" << std::endl;
+        }
     }
 }
-*/
-
 
 //The following should only be executed if isColliding is false
 //if(!isColliding)
 void Carro::moveForward()
 {
+    tX = posX; tY = posY; tZ = posZ;
+
     posX += (s_magnitude * dirX);
     posY += (s_magnitude * dirY);
     posZ += (s_magnitude * dirZ);
@@ -84,9 +95,18 @@ void Carro::moveForward()
 
 void Carro::moveBackward()
 {
+    tX = posX; tY = posY; tZ = posZ;
+
     posX -= (s_magnitude * dirX);
     posY -= (s_magnitude * dirY);
     posZ -= (s_magnitude * dirZ);
+}
+
+void Carro::moveRight()
+{
+    direction += r_magnitude;
+    direction = (direction >= 360.0f) ? direction-360.0f : direction;
+    updateDirection();
 }
 
 void Carro::moveLeft()
@@ -96,11 +116,9 @@ void Carro::moveLeft()
     updateDirection();
 }
 
-void Carro::moveRight()
+void Carro::moveRewind()
 {
-    direction += r_magnitude;
-    direction = (direction >= 360.0f) ? direction-360.0f : direction;
-    updateDirection();
+    posX = tX; posY = tY; posZ = tZ;
 }
 
 void Carro::updateDirection()

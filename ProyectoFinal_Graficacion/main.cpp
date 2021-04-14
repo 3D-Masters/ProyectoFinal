@@ -15,7 +15,7 @@
 #include "src/Camara.hpp"
 
 /*PRUEBA*/ #include "src/Model.hpp"
-#include "BoundingSphere.hpp"
+#include "src/BoundingSphere.hpp"
 
 using namespace std;
 
@@ -58,7 +58,10 @@ Camara camara(EYE_X,EYE_Y,EYE_Z,
               UP_X,UP_Y,UP_Z,0.75f,1.5f);
 
 //how do we update its variables like we did in Parcial2 in "aplicar"?
-BoundingSphere sunBoundingSphere(0.0f,0.0f,0.0f,1.0f);
+float x = 0, y = 0, z = 0;
+BoundingSphere sunBoundingSphere(&x,&y,&z,1.5f,BOUNDS_WALL);
+BoundingSphere arr[] = {sunBoundingSphere};
+
 void drawAxis()
 {
      //X axis in red
@@ -147,6 +150,9 @@ void updateMovement()
         mx.moveRight();
     if(arrows[3])   // LEFT
         mx.moveLeft();
+
+    // chequeo de colisiones XD
+    mx.handleCollisions(arr,1);
 
     glLoadIdentity();
     camara.set(

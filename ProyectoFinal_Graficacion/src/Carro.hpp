@@ -15,12 +15,12 @@ class Carro
     protected:
         float posX,posY,posZ;   // pos = position
         float dirX,dirY,dirZ;   // dir = direction
+        float tX,tY,tZ;         // temporal position
         float direction;        // angle of direction
         float s_magnitude;      // step magnitude
         float r_magnitude;      // rotation magnitude
 
-        bool isColliding;
-        BoundingSphere *boundingSpere;//The objects bounding sphere---UPDATE TO INCLUDE IN CONSTRUCTOR
+        BoundingSphere *boundingSphere;//The objects bounding sphere---UPDATE TO INCLUDE IN CONSTRUCTOR
         // Maybe is missing a collision variable or something... even textures!
         // ...
         void updateDirectionAngle();
@@ -50,14 +50,17 @@ class Carro
         float getRotMagnitude();
         float getDirection();
 
-        void checkCollisions(); //NEW XD CHECK INTEGRATION
+        // This function handles what will happend in case there is
+        // a collition detected
+        void handleCollisions(BoundingSphere*,int);
 
-        virtual void draw() = 0;    // Función específica para dibujarlo
-        virtual void update() = 0;  // Esto es específico para las animaciones que tenga.
-        virtual void moveForward();         // Función especial para mover al objeto
-        virtual void moveBackward();        // Función especial para mover al objeto
-        virtual void moveRight();           // Función especial para mover al objeto
-        virtual void moveLeft();            // Función especial para mover al objeto
+        virtual void draw() = 0;        // Función específica para dibujarlo
+        virtual void update() = 0;      // Esto es específico para las animaciones que tenga.
+        virtual void moveForward();     // Función especial para mover al objeto
+        virtual void moveBackward();    // Función especial para mover al objeto
+        virtual void moveRight();       // Función especial para mover al objeto
+        virtual void moveLeft();        // Función especial para mover al objeto
+        virtual void moveRewind();      // Función especial para rebobinar movimiento
 
         // Maybe some "actions", for instante, "explode" or something XD
 };

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1618266857 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\main.cpp
+1618435527 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\main.cpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -8,6 +8,7 @@
 	<GL/glut.h>
 	<stdlib.h>
 	"src/Camara.hpp"
+	"src/BoundingSphere.hpp"
 
 1426374928 c:\program files\codeblocks\mingw\include\gl\glut.h
 	"freeglut_std.h"
@@ -23,14 +24,15 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1618267233 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.cpp
+1618433692 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.cpp
 	"Carro.hpp"
 	<iostream>
 
-1618266011 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.hpp
+1618436170 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.hpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	"../util/Utilities.hpp"
+	"BoundingSphere.hpp"
 
 1618171391 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\include\camara.hpp
 	<math.h>
@@ -968,9 +970,16 @@
 1618262243 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\model.hpp
 	"Carro.hpp"
 
-1618260194 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\util\utilities.hpp
+1618414996 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\util\utilities.hpp
 	<cmath>
 
-1618260130 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\util\utilities.cpp
+1618414996 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\util\utilities.cpp
 	"Utilities.hpp"
+
+1618429297 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\boundingsphere.hpp
+	"../util/Utilities.hpp"
+	<iostream>
+
+1618429913 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\boundingsphere.cpp
+	"BoundingSphere.hpp"
 

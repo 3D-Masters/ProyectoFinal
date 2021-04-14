@@ -1,49 +1,66 @@
 #include "BoundingSphere.hpp"
 
-BoundingSphere::BoundingSphere(float x, float y, float z, float radius)
+BoundingSphere::BoundingSphere(float* x, float* y, float* z, float radius, int type)
 {
     centerX = x; centerY = y; centerZ = z;
     this->radius = radius;
+    this->type= type;
 }
 
 BoundingSphere::~BoundingSphere(){}
 
-bool BoundingSphere::isColliding(BoundingSphere otherSphere)
+int BoundingSphere::isColliding(BoundingSphere otherSphere)
 {
     //Sum of both of the boundingSphere's radius
     float radiusDistance = this->radius + otherSphere.getRadius();
 
     //Distance between the two center points of the BoundingSphere's
-    float distance = Util::pointDistance(centerX,centerY,centerZ,
+    float distance = Util::pointDistance(*centerX,*centerY,*centerZ,
                                          otherSphere.getCenterX(), otherSphere.getCenterY(), otherSphere.getCenterZ());
 
     //If the distance between the the center points of the BoundingSpheres minus the sum
     //of both of these BoundingSpheres's radius is less than 0 (or a predefined error margin)
     //then the BoundingSpheres are touching.
     if((distance - radiusDistance) <= ERROR_MARGIN)
-        return true;
-    return false;
+        return otherSphere.getType();
+    return BOUNDS_NONE;
 }
 
-void BoundingSphere::translateCenter(float tx, float ty, float tz)
+bool BoundingSphere::isNone(int type)
 {
-    centerX += tx; centerY += ty; centerZ += tz;
+    return type == BOUNDS_NONE;
 }
 
-void BoundingSphere::scaleRadius(float sf)
+bool BoundingSphere::isWall(int type)
 {
-    radius *= sf;
+    return type == BOUNDS_WALL;
 }
 
-float BoundingSphere::getCenterX(){return centerX;}
-float BoundingSphere::getCenterY(){return centerY;}
-float BoundingSphere::getCenterZ(){return centerZ;}
+bool BoundingSphere::isKart(int type)
+{
+    return type == BOUNDS_KART;
+}
+
+void BoundingSphere::setRadius(float sf)
+{
+    radius = sf;
+}
+
+void BoundingSphere::setType(int ty)
+{
+    type = ty;
+}
+
+float BoundingSphere::getCenterX(){return *centerX;}
+float BoundingSphere::getCenterY(){return *centerY;}
+float BoundingSphere::getCenterZ(){return *centerZ;}
 float BoundingSphere::getRadius(){return radius;}
-
+int BoundingSphere::getType(){return type;}
+/*
 void BoundingSphere::setCenterX(float x){centerX = x;}
 void BoundingSphere::setCenterY(float y){centerY = y;}
 void BoundingSphere::setCenterZ(float z){centerZ = z;}
-
+*/
 void BoundingSphere::printValues()
 {
     std::cout << "CENTER: " << centerX << " " << centerY << " " << centerZ <<
