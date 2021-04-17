@@ -10,8 +10,8 @@
 #include <GL/glut.h>
 #include <stdlib.h>
 
-#define WIDTH 960
-#define HEIGHT 480
+#define WIDTH 1280
+#define HEIGHT 720
 #include "src/Camara.hpp"
 
 /*PRUEBA*/ #include "src/Model.hpp"
@@ -22,7 +22,7 @@ using namespace std;
 //Variables para establecer los valores de gluPerspective
 float FOVY=60.0;
 float ZNEAR=0.01;
-float ZFAR=50.0;
+float ZFAR=75.0;
 
 float EYE_X=0.0;
 float EYE_Y=0.0;
@@ -59,8 +59,9 @@ Camara camara(EYE_X,EYE_Y,EYE_Z,
 
 //how do we update its variables like we did in Parcial2 in "aplicar"?
 float x = 0, y = 0, z = 0;
-BoundingSphere sunBoundingSphere(&x,&y,&z,1.5f,BOUNDS_WALL);
-BoundingSphere arr[] = {sunBoundingSphere};
+BoundingSphere sunBoundingSphere(&x,&y,&z,2,BOUNDS_WALL,true);
+BoundingSphere extBoundingSphere(&x,&y,&z,35,BOUNDS_WALL,false);
+BoundingSphere arr[] = {sunBoundingSphere,extBoundingSphere};
 
 void drawAxis()
 {
@@ -152,7 +153,7 @@ void updateMovement()
         mx.moveLeft();
 
     // chequeo de colisiones XD
-    mx.handleCollisions(arr,1);
+    mx.handleCollisions(arr,2);
 
     glLoadIdentity();
     camara.set(
@@ -260,12 +261,21 @@ void display()
     glPushMatrix();
 
     glPushMatrix();
-    mx.draw();
-    glScalef(scaleVar,scaleVar,scaleVar);
-    glRotatef(120,0.0f,1.0f,0.0f);
-    TheSun();
+
+    glPushMatrix();
+
+    glRotatef(90,1,0,0);
+    glutWireSphere(35,10,10);
+    glutWireSphere(2,10,10);
+
     glPopMatrix();
-    Earth();
+
+    mx.draw();
+    //glScalef(scaleVar,scaleVar,scaleVar);
+    //glRotatef(120,0.0f,1.0f,0.0f);
+    //TheSun();
+    glPopMatrix();
+    //Earth();
 
     glPopMatrix();
 

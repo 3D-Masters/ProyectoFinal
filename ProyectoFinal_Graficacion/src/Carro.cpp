@@ -11,7 +11,7 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
 
     updateDirectionAngle();
 
-    boundingSphere = new BoundingSphere(&posX,&posY,&posZ,1.1,BOUNDS_KART);
+    boundingSphere = new BoundingSphere(&posX,&posY,&posZ,0.5,BOUNDS_KART,true);
 
     // ...
 }
@@ -25,7 +25,7 @@ Carro::Carro()
 
     updateDirectionAngle();
 
-    boundingSphere = new BoundingSphere(&posX,&posY,&posZ,1.1,BOUNDS_KART);
+    boundingSphere = new BoundingSphere(&posX,&posY,&posZ,1.1,BOUNDS_KART,true);
 }
 
 Carro::~Carro()

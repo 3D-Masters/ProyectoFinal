@@ -3,7 +3,7 @@
 
 #include "../util/Utilities.hpp"
 #include <iostream>
-#define ERROR_MARGIN 0.1
+#define ERROR_MARGIN 0.0
 
 #define BOUNDS_NONE 0
 #define BOUNDS_WALL 1
@@ -15,8 +15,9 @@ class BoundingSphere
         float *centerX, *centerY, *centerZ;
         int type;
         float radius;
+        bool inner;
     public:
-        BoundingSphere(float*, float*, float*, float, int);
+        BoundingSphere(float*, float*, float*, float, int, bool);
         ~BoundingSphere();
 
         int isColliding(BoundingSphere);
@@ -29,6 +30,7 @@ class BoundingSphere
         float getCenterZ();
         float getRadius();
         int getType();
+        bool getInnerValue();
 
         /*
         void setCenterX(float);
@@ -37,6 +39,7 @@ class BoundingSphere
         */
         void setRadius(float);
         void setType(int);
+        void setInnerValue(bool);
 
         void printValues();
 };
