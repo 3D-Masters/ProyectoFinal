@@ -1,11 +1,16 @@
 #include "Model.hpp"
 
-ModelX::ModelX():Carro(),t(6)
+ModelX::ModelX():Carro()
 {
-    filename[0] = "res/RedLeavesTexture.bmp";
+    initTextures();
     ang=0;
 }
 ModelX::~ModelX(){}
+
+void ModelX::initTextures()
+{
+    texFilename[0] = "res/default.bmp";
+}
 
 void ModelX::drawBase()
 {
@@ -36,7 +41,7 @@ void ModelX::drawBase()
         glVertex3f(-0.5f, 0.15f, -1.0f);
         glVertex3f(0.5f, 0.15f, -1.0f);
 	//Back
-        t.Bind(0);  //Bind Texture 0
+        tex.Bind(0);  //Bind Texture 0
 
         glTexCoord2f(1.0f,1.0f);
         glNormal3f(0.0f, 0.0f, -1.0f);
@@ -84,7 +89,7 @@ void ModelX::drawUp()
         glVertex3f(0.4,0.45,-0.7);
         glVertex3f(0.4,0.45,0.7);
     //left
-        t.Bind(0);
+        tex.Bind(0);
 
         glTexCoord2f(0.0f,0.0f);
         glNormal3f(-1.0f,0.0f,0.0f);
@@ -102,7 +107,7 @@ void ModelX::drawUp()
         glVertex3f(0.4f,0.45f,-0.7);
         glVertex3f(-0.3,0.45f,-0.7);
     //top
-        t.Bind(0);
+        tex.Bind(0);
         glTexCoord2f(0.0f,0.0f);
         glNormal3f(0.0f,1.0f,0.0f);
         glVertex3f(-0.3f,0.45f,0.7f);
@@ -124,7 +129,7 @@ void ModelX::drawUp()
 void ModelX::draw()
 {
     //Cargando Textura
-    t.loadTexture(filename[0],0);
+    tex.loadTexture(texFilename[0],0);
     //Dibujando el auto de forma solida
     glPushMatrix();
 

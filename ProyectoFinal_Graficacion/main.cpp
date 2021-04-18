@@ -15,6 +15,7 @@
 #include "src/Camara.hpp"
 
 /*PRUEBA*/ #include "src/Model.hpp"
+#include "src/Muro.hpp"
 #include "src/BoundingSphere.hpp"
 
 using namespace std;
@@ -22,7 +23,7 @@ using namespace std;
 //Variables para establecer los valores de gluPerspective
 float FOVY=60.0;
 float ZNEAR=0.01;
-float ZFAR=75.0;
+float ZFAR=150.0;
 
 float EYE_X=0.0;
 float EYE_Y=0.0;
@@ -46,6 +47,8 @@ float Z_MIN=-500;
 float Z_MAX=500;
 
 ModelX mx; //modeloX
+Muro muro;
+
 bool arrows[] = {
     false,  // UP
     false,  // DOWN
@@ -61,7 +64,8 @@ Camara camara(EYE_X,EYE_Y,EYE_Z,
 float x = 0, y = 0, z = 0;
 BoundingSphere sunBoundingSphere(&x,&y,&z,2,BOUNDS_WALL,true);
 BoundingSphere extBoundingSphere(&x,&y,&z,35,BOUNDS_WALL,false);
-BoundingSphere arr[] = {sunBoundingSphere,extBoundingSphere};
+//BoundingSphere arr[] = {sunBoundingSphere,extBoundingSphere};
+BoundingSphere arr[] = {sunBoundingSphere,muro.getBounds()};
 
 void drawAxis()
 {
@@ -275,6 +279,7 @@ void display()
     glPopMatrix();
 
     mx.draw();
+    muro.draw();
     //glScalef(scaleVar,scaleVar,scaleVar);
     //glRotatef(120,0.0f,1.0f,0.0f);
     //TheSun();

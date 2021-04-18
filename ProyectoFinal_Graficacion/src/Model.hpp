@@ -6,11 +6,9 @@
 class ModelX:public Carro
 {
     private:
-        char* filename[6];
-        Texture t;
-
         void drawBase();
         void drawUp();
+        void initTextures();
     public:
         float ang;
 

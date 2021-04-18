@@ -1,7 +1,8 @@
 #include "Carro.hpp"
 #include <iostream>
 
-Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step, float rot)
+Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step, float rot):
+    tex(TEXTURE_LIMIT)
 {
     posX = x;   posY = y;   posZ = z;
     dirX = dx;  dirY = dy;  dirZ = dz;
@@ -12,11 +13,10 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
     updateDirectionAngle();
 
     boundingSphere = new BoundingSphere(&posX,&posY,&posZ,0.5,BOUNDS_KART,true);
-
-    // ...
 }
 
-Carro::Carro()
+Carro::Carro():
+    tex(TEXTURE_LIMIT)
 {
     posX = posY = posZ = 0;
     dirX = dirY = 0; dirZ = 1;
@@ -31,6 +31,11 @@ Carro::Carro()
 Carro::~Carro()
 {
     delete boundingSphere;
+}
+
+void Carro::initTextures()
+{
+    texFilename[0] = "res/default.bmp";
 }
 
 void Carro::setPositionPoint(float x, float y, float z)
@@ -61,6 +66,7 @@ float Carro::getStepMagnitude(){return s_magnitude;}
 void Carro::setRotMagnitude(float m){r_magnitude = m;}
 float Carro::getRotMagnitude(){return r_magnitude;}
 float Carro::getDirection(){return direction;}
+BoundingSphere Carro::getBounds(){return *boundingSphere;}
 
 void Carro::handleCollisions(BoundingSphere* spheres, int sizeN)
 {

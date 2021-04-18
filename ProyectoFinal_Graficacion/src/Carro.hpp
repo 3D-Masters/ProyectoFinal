@@ -7,8 +7,12 @@
 #include <GL/glut.h>
 #endif
 
+#include "GL/glut.h"
 #include "../util/Utilities.hpp"
 #include "BoundingSphere.hpp"
+#include "Texture.hpp"
+
+#define TEXTURE_LIMIT 4
 
 class Carro
 {
@@ -21,8 +25,11 @@ class Carro
         float r_magnitude;      // rotation magnitude
 
         BoundingSphere *boundingSphere;//The objects bounding sphere---UPDATE TO INCLUDE IN CONSTRUCTOR
-        // Maybe is missing a collision variable or something... even textures!
-        // ...
+
+        char* texFilename[TEXTURE_LIMIT];
+        Texture tex;
+        virtual void initTextures();    // this must be initialized inside derived classes
+
         void updateDirectionAngle();
         void updateDirection();
     public:
@@ -49,6 +56,7 @@ class Carro
         void setRotMagnitude(float);
         float getRotMagnitude();
         float getDirection();
+        BoundingSphere getBounds();
 
         // This function handles what will happend in case there is
         // a collition detected
