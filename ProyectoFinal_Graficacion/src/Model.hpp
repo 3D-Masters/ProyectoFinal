@@ -2,10 +2,13 @@
 #define MODEL_HPP_INCLUDED
 
 #include "Carro.hpp"
-
+#include "Texture.hpp"
 class ModelX:public Carro
 {
     private:
+        char* filename[6];
+        Texture t;
+
         void drawBase();
         void drawUp();
     public:

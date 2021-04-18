@@ -95,6 +95,10 @@ void init()
     gluPerspective(FOVY,(float)WIDTH/HEIGHT,ZNEAR,ZFAR);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+    //texturas
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+    glShadeModel(GL_FLAT);
+
     glEnable(GL_DEPTH_TEST);
     mx.setDirectionVector(DIR_X,DIR_Y,DIR_Z);
     mx.setPositionPoint(EYE_X,EYE_Y,EYE_Z);

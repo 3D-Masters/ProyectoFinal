@@ -1,15 +1,19 @@
 #include "Model.hpp"
 
-ModelX::ModelX():Carro()
+ModelX::ModelX():Carro(),t(6)
 {
+    filename[0] = "res/RedLeavesTexture.bmp";
     ang=0;
 }
 ModelX::~ModelX(){}
 
 void ModelX::drawBase()
 {
+    //Activando las texturas
+    glEnable(GL_TEXTURE_2D);
+
     glPushMatrix();
-    glColor3f(1.0f,1.0f,0.0f);//naranja xd
+    glColor3f(1.0f,1.0f,1.0f);
     //glRotatef(ang,0.0f,1.0,1.0);        //PRUEBA
     glBegin(GL_QUADS);
     /*=======BASE AUTO=======*/
@@ -32,10 +36,17 @@ void ModelX::drawBase()
         glVertex3f(-0.5f, 0.15f, -1.0f);
         glVertex3f(0.5f, 0.15f, -1.0f);
 	//Back
+        t.Bind(0);  //Bind Texture 0
+
+        glTexCoord2f(1.0f,1.0f);
         glNormal3f(0.0f, 0.0f, -1.0f);
+        glTexCoord2f(0.0f,0.0f);
         glVertex3f(-0.5f, -0.15f, 1.0f);
+        glTexCoord2f(1.0f,0.0f);
         glVertex3f(-0.5f, -0.15f, -1.0f);
+        glTexCoord2f(1.0f,1.0f);
         glVertex3f(-0.5f, 0.15f, -1.0f);
+        glTexCoord2f(0.0f,1.0f);
         glVertex3f(-0.5f, 0.15f, 1.0f);
     //Bottom
         glNormal3f(0.0f,-1.0f,0.0f);
@@ -46,14 +57,17 @@ void ModelX::drawBase()
 
 	glEnd();
     glPopMatrix();
+
+    glDisable(GL_TEXTURE_2D);
     //dibujandoLlantas
     //glPushMatrix();
 
 }
 void ModelX::drawUp()
 {
+    glEnable(GL_TEXTURE_2D);
     glPushMatrix();
-    glColor3f(1.0f,0.0f,0.0f);
+    glColor3f(1.0f,1.0f,1.0f);
     //glRotatef(ang,0.0f,1.0f,1.0f);
     glBegin(GL_QUADS);
     /*=====PARTE SUPERIOR=====*/
@@ -70,10 +84,16 @@ void ModelX::drawUp()
         glVertex3f(0.4,0.45,-0.7);
         glVertex3f(0.4,0.45,0.7);
     //left
+        t.Bind(0);
+
+        glTexCoord2f(0.0f,0.0f);
         glNormal3f(-1.0f,0.0f,0.0f);
         glVertex3f(-0.5f,0.15f,1.0f);
+        glTexCoord2f(1.0,0.0);
         glVertex3f(-0.5f,0.15f,-1.0f);
+        glTexCoord2f(1.0f,1.0f);
         glVertex3f(-0.3f,0.45f,-0.7f);
+        glTexCoord2f(0.0f,1.0f);
         glVertex3f(-0.3f,0.45f,0.7);
     //back
         glNormal3f(0.0f,0.0f,-1.0f);
@@ -82,20 +102,29 @@ void ModelX::drawUp()
         glVertex3f(0.4f,0.45f,-0.7);
         glVertex3f(-0.3,0.45f,-0.7);
     //top
+        t.Bind(0);
+        glTexCoord2f(0.0f,0.0f);
         glNormal3f(0.0f,1.0f,0.0f);
         glVertex3f(-0.3f,0.45f,0.7f);
+        glTexCoord2f(1.0f,0.0f);
         glVertex3f(0.4f,0.45f,0.7f);
+        glTexCoord2f(1.0f,1.0f);
         glVertex3f(0.4f,0.45f,-0.7f);
+        glTexCoord2f(0.0f,1.0f);
         glVertex3f(-0.3f,0.45f,-0.7f);
     //bottom
         //glNormal3f(0.0f,-1.0,0.0f);
 
     glEnd();
     glPopMatrix();
+
+    glDisable(GL_TEXTURE_2D);
 }
 
 void ModelX::draw()
 {
+    //Cargando Textura
+    t.loadTexture(filename[0],0);
     //Dibujando el auto de forma solida
     glPushMatrix();
 
