@@ -9,6 +9,9 @@
 #include <math.h>
 #include <GL/glut.h>
 #include <stdlib.h>
+#include <chrono>
+
+#include <cstdlib>
 
 #define WIDTH 1280
 #define HEIGHT 720
@@ -47,6 +50,10 @@ float Z_MIN=-500;
 float Z_MAX=500;
 
 ModelX mx; //modeloX
+ModelX mx2;
+ModelX mx3;
+ModelX mx4;
+ModelX mx5;
 Muro muro;
 
 bool arrows[] = {
@@ -65,7 +72,19 @@ float x = 0, y = 0, z = 0;
 BoundingSphere sunBoundingSphere(&x,&y,&z,2,BOUNDS_WALL,true);
 BoundingSphere extBoundingSphere(&x,&y,&z,35,BOUNDS_WALL,false);
 //BoundingSphere arr[] = {sunBoundingSphere,extBoundingSphere};
-BoundingSphere arr[] = {sunBoundingSphere,muro.getBounds()};
+BoundingSphere arr[] = {sunBoundingSphere, muro.getBounds(), mx.getBounds(), mx2.getBounds(), mx3.getBounds(), mx4.getBounds(), mx5.getBounds()};
+auto start = std::chrono::steady_clock::now();
+
+void drawPlane()
+{
+    glBegin(GL_QUADS);
+     glColor3f(0.2f,0.2f,0.2f);
+     glVertex3f( 1.0f, 0.0f,  1.0f);
+     glVertex3f(-1.0f, 0.0f,  1.0f);
+     glVertex3f(-1.0f, 0.0f, -1.0f);
+     glVertex3f( 1.0f, 0.0f, -1.0f);
+    glEnd();
+}
 
 void drawAxis()
 {
@@ -106,6 +125,19 @@ void init()
     glEnable(GL_DEPTH_TEST);
     mx.setDirectionVector(DIR_X,DIR_Y,DIR_Z);
     mx.setPositionPoint(EYE_X,EYE_Y,EYE_Z);
+
+    mx2.setDirectionVector(DIR_X,DIR_Y,DIR_Z);
+    mx2.setPositionPoint(30,0,0);
+
+    mx3.setDirectionVector(DIR_X,DIR_Y,DIR_Z);
+    mx3.setPositionPoint(-30,0,0);
+
+    mx4.setDirectionVector(DIR_X,DIR_Y,DIR_Z);
+    mx4.setPositionPoint(0,0,30);
+
+    mx5.setDirectionVector(DIR_X,DIR_Y,DIR_Z);
+    mx5.setPositionPoint(0,0,-30);
+
     camara.display();
 
     glutIgnoreKeyRepeat(true);
@@ -149,19 +181,72 @@ void SpecialUpInput(int key, int x, int y)
     //std::cout << "no" << std::endl;
 }
 
+void updateOthers()
+{
+    auto end = std::chrono::steady_clock::now();
+
+    int elapsed_time = int(std::chrono::duration_cast <std::chrono::seconds>(end - start).count());
+    float divisor =  1.0f; //std::rand() % 11;
+    float a, b, c, d , e;
+
+    //std::cout << elapsed_time << std::endl;
+
+    if((elapsed_time % 2) == 0)
+    {
+        a = std::rand() % 2;
+        b = std::rand() % 2;
+        c = std::rand() % 2;
+        d = std::rand() % 2;
+        e = std::rand() % 2;
+
+        a /= divisor;
+        b /= divisor;
+        c /= divisor;
+        d /= divisor;
+        e /= divisor;
+
+        mx2.setDirectionVector(a,0,c);
+        mx3.setDirectionVector(b,0,d);
+        mx4.setDirectionVector(c,0,e);
+        mx5.setDirectionVector(d,0,a);
+
+        mx2.moveBackward();
+        mx3.moveBackward();
+        mx4.moveBackward();
+        mx5.moveBackward();
+    }
+    else
+    {
+        mx2.moveForward();
+        mx3.moveForward();
+        mx4.moveForward();
+        mx5.moveForward();
+    }
+}
+
 void updateMovement()
 {
     if(arrows[0])   // UP
-        mx.moveForward();
+    {
+       mx.moveForward();
+    }
+
     if(arrows[1])   // DOWN
+    {
         mx.moveBackward();
+    }
     if(arrows[2])   // RIGTH
         mx.moveRight();
     if(arrows[3])   // LEFT
         mx.moveLeft();
 
     // chequeo de colisiones XD
-    mx.handleCollisions(arr,2);
+    mx.handleCollisions(arr,7);
+    mx2.handleCollisions(arr,7);
+    mx3.handleCollisions(arr,7);
+    mx4.handleCollisions(arr,7);
+    mx5.handleCollisions(arr,7);
+
 
     glLoadIdentity();
     camara.set(
@@ -179,92 +264,21 @@ void updateMovement()
     camara.display();
 }
 
-float anguloSun = 0.0f;
-float anguloEarth = 0.0f;
-float anguloMoon = 0.0f;
-float scaleStep = 0.001f;
-float scaleVar = 1.0f;
 
-void TheSun()
-{
-    glColor3f(1.0f,0.6f,0.0f);
-    for(int i = 0; i < 8; i++)
-    {
-        glPushMatrix();
-
-        glRotatef(anguloSun,0.0f,1.0f,0.0f);
-        glRotatef((float)(i*45),1.0f,0.0f,0.0f);
-        glutWireCone(1.0f,2.0f,10,10);
-
-        glPopMatrix();
-    }
-}
-
-void Moon()
-{
-    glColor3f(1.0f,1.0f,1.0f);
-    glPushMatrix();
-
-    glRotatef(anguloMoon,0.0,1.0,0.0);
-    glTranslatef(2.0f,0.0f,0.0f);
-    glutWireSphere(0.5,10,10);
-
-
-    glPopMatrix();
-}
-
-void Earth()
-{
-    glColor3f(0.5f,0.7f,1.0f);
-    glPushMatrix();
-
-    glRotatef(anguloEarth,0.0,1.0,0.0);
-    glTranslatef(5.0f,0.0f,0.0f);
-    glutWireSphere(1.0,12,12);
-    Moon();
-
-    glPushMatrix();
-    glRotatef(90.0f,0.0f,0.0f,1.0f);
-    Moon();
-    glPopMatrix();
-
-    glPushMatrix();
-    glRotatef(90.0f,0.0f,1.0f,0.0f);
-    Moon();
-    glPopMatrix();
-
-    glPushMatrix();
-    glRotatef(90.0f,1.0f,0.0f,0.0f);
-    Moon();
-    glPopMatrix();
-
-
-    glPopMatrix();
-}
-
-void updateScaleStep()
-{
-    if(scaleVar >= 3.0f || scaleVar < 1.0f)
-        scaleStep *= -1;
-    scaleVar += scaleStep;
-
-}
-
-void update()
-{
-    anguloSun += 0.01f;
-    anguloEarth += 0.05f;
-    anguloMoon += 0.2f;
-    updateScaleStep();
-}
 
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     updateMovement();   // Se realiza aquí para que reaccione al instante en la escena.
+    updateOthers(); // "AI" for cars xd
 
     drawAxis();
+
+    glPushMatrix();
+    glScalef(70.0f,70.f,70.0f);
+    drawPlane();
+    glPopMatrix();
 
     glPushMatrix();
 
@@ -279,18 +293,20 @@ void display()
     glPopMatrix();
 
     mx.draw();
+    mx2.draw();
+    mx3.draw();
+    mx4.draw();
+    mx5.draw();
     muro.draw();
-    //glScalef(scaleVar,scaleVar,scaleVar);
-    //glRotatef(120,0.0f,1.0f,0.0f);
-    //TheSun();
+
     glPopMatrix();
-    //Earth();
+
 
     glPopMatrix();
 
     glutSwapBuffers();
 
-    update();
+
     //mx.update();
     Sleep(10);
 }

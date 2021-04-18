@@ -1,13 +1,16 @@
 #include "BoundingSphere.hpp"
-
+int BoundingSphere::ID = 0;
 BoundingSphere::BoundingSphere(float* x, float* y, float* z, float radius, int type, bool inner)
 {
     centerX = x; centerY = y; centerZ = z;
     this->radius = radius;
     this->type = type;
     this->inner = inner;
+    myID = ID;
+    ID++;
 }
 
+int BoundingSphere::getMyID(){return myID;}
 BoundingSphere::~BoundingSphere(){}
 
 int BoundingSphere::isColliding(BoundingSphere otherSphere)

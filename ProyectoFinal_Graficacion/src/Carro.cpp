@@ -72,18 +72,22 @@ void Carro::handleCollisions(BoundingSphere* spheres, int sizeN)
 {
     int value;
 
+
     for(int i = 0; i < sizeN; i++)
     {
-        value = boundingSphere->isColliding(spheres[i]);
-        if(BoundingSphere::isWall(value))
+        if(boundingSphere->getMyID() != spheres[i].getMyID())
         {
-            moveRewind();
-            std::cout << "Collision with Wall" << std::endl;
-        }
-        else if(BoundingSphere::isKart(value))
-        {
-            // rotar, mover, explotar
-            std::cout << "Collision with Kart" << std::endl;
+            value = boundingSphere->isColliding(spheres[i]);
+            if(BoundingSphere::isWall(value))
+            {
+                moveRewind();
+                std::cout << "Collision with Wall" << std::endl;
+            }
+            else if(BoundingSphere::isKart(value))
+            {
+                // rotar, mover, explotar
+                std::cout << "Collision with Kart" << std::endl;
+            }
         }
     }
 }

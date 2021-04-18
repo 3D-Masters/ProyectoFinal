@@ -12,14 +12,17 @@
 class BoundingSphere
 {
     private:
+        static int ID;
         float *centerX, *centerY, *centerZ;
         int type;
         float radius;
         bool inner;
+        int myID;
     public:
         BoundingSphere(float*, float*, float*, float, int, bool);
         ~BoundingSphere();
 
+        int getMyID();
         int isColliding(BoundingSphere);
         static bool isNone(int);
         static bool isWall(int);
