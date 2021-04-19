@@ -43,8 +43,6 @@
 			<Add directory="C:/Program Files/CodeBlocks/MinGW/lib" />
 		</Linker>
 		<Unit filename="main.cpp" />
-		<Unit filename="src/BoundingSphere.cpp" />
-		<Unit filename="src/BoundingSphere.hpp" />
 		<Unit filename="src/Camara.cpp" />
 		<Unit filename="src/Camara.hpp" />
 		<Unit filename="src/Carro.cpp" />

@@ -9,7 +9,6 @@
 
 #include "GL/glut.h"
 #include "../util/Utilities.hpp"
-#include "BoundingSphere.hpp"
 #include "Texture.hpp"
 
 #define TEXTURE_LIMIT 4
@@ -30,8 +29,6 @@ class Carro
         float direction;        // angle of direction
         float s_magnitude;      // step magnitude
         float r_magnitude;      // rotation magnitude
-
-        BoundingSphere *boundingSphere;//The objects bounding sphere---UPDATE TO INCLUDE IN CONSTRUCTOR
 
         char* texFilename[TEXTURE_LIMIT];
         Texture tex;
@@ -76,11 +73,6 @@ class Carro
         void setRotMagnitude(float);
         float getRotMagnitude();
         float getDirection();
-        BoundingSphere* getBounds();
-
-        // This function handles what will happend in case there is
-        // a collition detected
-        void handleCollisions(BoundingSphere*,int);
 
         virtual void draw() = 0;        // Función específica para dibujarlo
         virtual void update() = 0;      // Esto es específico para las animaciones que tenga.

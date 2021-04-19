@@ -9,7 +9,6 @@
 #include <chrono>
 
 #include "../util/Utilities.hpp"
-#include "BoundingSphere.hpp"
 #include "Camara.hpp"
 #include "Carro.hpp"
 #include "Model.hpp"

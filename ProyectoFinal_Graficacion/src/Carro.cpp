@@ -19,8 +19,6 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
     r_magnitude = rot;
 
     updateDirectionAngle();
-
-    boundingSphere = new BoundingSphere(&posX,&posY,&posZ,0.5,BOUNDS_KART,true);
 }
 
 Carro::Carro():
@@ -38,14 +36,9 @@ Carro::Carro():
     r_magnitude = 2.5f;
 
     updateDirectionAngle();
-
-    boundingSphere = new BoundingSphere(&posX,&posY,&posZ,1.1,BOUNDS_KART,true);
 }
 
-Carro::~Carro()
-{
-    delete boundingSphere;
-}
+Carro::~Carro(){}
 
 void Carro::initTextures()
 {
@@ -101,31 +94,6 @@ float Carro::getStepMagnitude(){return s_magnitude;}
 void Carro::setRotMagnitude(float m){r_magnitude = m;}
 float Carro::getRotMagnitude(){return r_magnitude;}
 float Carro::getDirection(){return direction;}
-BoundingSphere* Carro::getBounds(){return boundingSphere;}
-
-void Carro::handleCollisions(BoundingSphere* spheres, int sizeN)
-{
-    int value;
-
-
-    for(int i = 0; i < sizeN; i++)
-    {
-        if(boundingSphere->getMyID() != spheres[i].getMyID())
-        {
-            value = boundingSphere->isColliding(spheres[i]);
-            if(BoundingSphere::isWall(value))
-            {
-                moveRewind();
-                //std::cout << "Collision with Wall" << std::endl;
-            }
-            else if(BoundingSphere::isKart(value))
-            {
-                // rotar, mover, explotar
-                std::cout << "Collision with Kart" << std::endl;
-            }
-        }
-    }
-}
 
 void Carro::accelerateForward()
 {

@@ -6,8 +6,6 @@ Muro::Muro(): tex(1)
     float step = (float) 360.0f / (float) WALL_RES;
     x = y = z = 0.0f;
 
-    collider = new BoundingSphere(&x,&y,&z,WALL_RAD,BOUNDS_WALL,false);
-
     texFilename = "res/wall.bmp";
 
     for(int i = 0; i < WALL_RES; i++)
@@ -18,15 +16,12 @@ Muro::Muro(): tex(1)
     }
 }
 
-Muro::~Muro()
-{
-    delete collider;
-}
+Muro::~Muro(){}
 
-BoundingSphere* Muro::getBounds()
-{
-    return collider;
-}
+float Muro::getX(){return x;}
+float Muro::getY(){return y;}
+float Muro::getZ(){return z;}
+float Muro::getRadious(){ return WALL_RAD; }
 
 void Muro::draw()
 {
