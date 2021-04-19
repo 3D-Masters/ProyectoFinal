@@ -17,8 +17,15 @@
 class Carro
 {
     protected:
+        static int ID;
+        int MyID;
+
+        float radious;
+
         float posX,posY,posZ;   // pos = position
         float dirX,dirY,dirZ;   // dir = direction
+        float velX,     velZ;   // vel = velocity
+        float accX,     accZ;   // acc = acceleration
         float tX,tY,tZ;         // temporal position
         float direction;        // angle of direction
         float s_magnitude;      // step magnitude
@@ -37,6 +44,9 @@ class Carro
         Carro();
         ~Carro();
 
+        int getID();
+        float getRadious();
+        void setRadious(float);
         void setPositionPoint(float,float,float);
         void setPosX(float);
         void setPosY(float);
@@ -51,12 +61,22 @@ class Carro
         float getDirX();
         float getDirY();
         float getDirZ();
+        void setVelocity(float,float);
+        void setVelX(float);
+        void setVelZ(float);
+        float getVelX();
+        float getVelZ();
+        void setAcceleration(float,float);
+        void setAccX(float);
+        void setAccZ(float);
+        float getAccX();
+        float getAccZ();
         void setStepMagnitude(float);
         float getStepMagnitude();
         void setRotMagnitude(float);
         float getRotMagnitude();
         float getDirection();
-        BoundingSphere getBounds();
+        BoundingSphere* getBounds();
 
         // This function handles what will happend in case there is
         // a collition detected
@@ -64,8 +84,8 @@ class Carro
 
         virtual void draw() = 0;        // Función específica para dibujarlo
         virtual void update() = 0;      // Esto es específico para las animaciones que tenga.
-        virtual void moveForward();     // Función especial para mover al objeto
-        virtual void moveBackward();    // Función especial para mover al objeto
+        virtual void accelerateForward();     // Función especial para mover al objeto
+        virtual void accelerateBackward();    // Función especial para mover al objeto
         virtual void moveRight();       // Función especial para mover al objeto
         virtual void moveLeft();        // Función especial para mover al objeto
         virtual void moveRewind();      // Función especial para rebobinar movimiento
