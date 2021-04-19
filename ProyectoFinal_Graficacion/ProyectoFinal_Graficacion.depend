@@ -25,16 +25,15 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1618848945 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.cpp
+1618854368 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.cpp
 	"Carro.hpp"
 	<iostream>
 
-1618848224 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.hpp
+1618854403 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.hpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	"GL/glut.h"
 	"../util/Utilities.hpp"
-	"BoundingSphere.hpp"
 	"Texture.hpp"
 
 1618171391 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\include\camara.hpp
@@ -1063,18 +1062,17 @@
 1618712561 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\texture.cpp
 	"Texture.hpp"
 
-1618812793 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.hpp
+1618855624 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.hpp
 	"GL/glut.h"
-	"BoundingSphere.hpp"
 	"Texture.hpp"
 	"../util/Utilities.hpp"
 	<cmath>
 
-1618812793 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.cpp
+1618855645 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.cpp
 	"Muro.hpp"
 	<iostream>
 
-1618812793 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.hpp
+1618854524 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.hpp
 	<GL/glut.h>
 	<iostream>
 	<cmath>
@@ -1082,7 +1080,6 @@
 	<vector>
 	<chrono>
 	"../util/Utilities.hpp"
-	"BoundingSphere.hpp"
 	"Camara.hpp"
 	"Carro.hpp"
 	"Model.hpp"

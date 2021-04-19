@@ -172,23 +172,23 @@ void Scene::handleCollisions()
     Carro* target;
 
     float mass = 10.0f;
-
-    // Karts
+    float wallMass = 50.0f;
 
     float distance;
     float overlap, overlapX, overlapZ;
 
     std::vector<std::pair<Carro*,Carro*>> parDeColision;
+    std::vector<Carro*> colisionConMuro;
 
     for(int i = 0; i < NUM_SPHERES; i++)
     {
+        current = karts[i];
         for(int j = 0; j < NUM_SPHERES; j++)
         {
-            current = karts[i];
             target = karts[j];
-
             if(current->getID() != target->getID())
             {
+                // Static collision between karts
                 if((distance = Util::pointDistance(
                     current->getPosX(),
                     current->getPosY(),
@@ -221,14 +221,34 @@ void Scene::handleCollisions()
                 }
             }
         }
-    }
 
-    // Wall
+        // Static collision between karts and wall
+        if((distance = Util::pointDistance(
+            current->getPosX(),
+            current->getPosY(),
+            current->getPosZ(),
+            muro.getX(),
+            muro.getY(),
+            muro.getZ()
+        )) + current->getRadious() >= muro.getRadious())
+        {
+            colisionConMuro.push_back(current);
+
+            // Calculate displacement required
+            overlap = current->getRadious() + distance - muro.getRadious();
+
+            // Displace Current Ball away from collision
+            current->setPositionPoint(
+                current->getPosX() - overlap * (current->getPosX() - muro.getX()) / distance,
+                current->getPosY(),
+                current->getPosZ() - overlap * (current->getPosZ() - muro.getZ()) / distance
+            );
+        }
+    }
 
     // Handle dynamic collisions
 
-    // Kart
-
+    // Dynamic collision between karts
     for(unsigned i = 0; i < parDeColision.size(); i++)
     {
         current = parDeColision[i].first;
@@ -258,6 +278,31 @@ void Scene::handleCollisions()
 
         target->setVelX(target->getVelX() + offsetX);
         target->setVelZ(target->getVelZ() + offsetZ);
+    }
+
+    // Dynamic collision between karts and wall
+    for(unsigned i = 0; i < colisionConMuro.size(); i++)
+    {
+        current = colisionConMuro[i];
+
+        distance = Util::pointDistance(
+            current->getPosX(),
+            current->getPosY(),
+            current->getPosZ(),
+            muro.getX(),
+            muro.getY(),
+            muro.getZ()
+        );
+
+        float nx = (muro.getX() - current->getPosX()) / distance;
+        float nz = (muro.getZ() - current->getPosZ()) / distance;
+
+        float kx = current->getVelX();
+        float kz = current->getVelZ();
+        float p = 2.0 * (nx * kx + nz * kz) / (mass + wallMass);
+
+        current->setVelX(current->getVelX() - p*wallMass*nx);
+        current->setVelZ(current->getVelZ() - p*wallMass*nz);
     }
 }
 

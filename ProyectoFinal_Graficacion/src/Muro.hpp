@@ -2,7 +2,6 @@
 #define MURO_HPP_INCLUDED
 
 #include "GL/glut.h"
-#include "BoundingSphere.hpp"
 #include "Texture.hpp"
 #include "../util/Utilities.hpp"
 #include <cmath>
@@ -16,7 +15,8 @@ class Muro
 {
     private:
         float x,y,z;
-        BoundingSphere *collider;
+
+        float radious;
 
         float points[WALL_RES][2];
 
@@ -26,7 +26,11 @@ class Muro
         Muro();
         ~Muro();
 
-        BoundingSphere* getBounds();
+        float getX();
+        float getY();
+        float getZ();
+        float getRadious();
+
         void draw();
 };
 
