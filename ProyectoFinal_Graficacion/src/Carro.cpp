@@ -129,14 +129,14 @@ void Carro::handleCollisions(BoundingSphere* spheres, int sizeN)
 
 void Carro::accelerateForward()
 {
-    accX = s_magnitude * dirX;
-    accZ = s_magnitude * dirZ;
+    accX = 0.1 * s_magnitude * dirX;
+    accZ = 0.1 * s_magnitude * dirZ;
 }
 
 void Carro::accelerateBackward()
 {
-    accX = - s_magnitude * dirX;
-    accZ = - s_magnitude * dirZ;
+    accX = - 0.1 * s_magnitude * dirX;
+    accZ = - 0.1 * s_magnitude * dirZ;
 }
 
 void Carro::moveRight()

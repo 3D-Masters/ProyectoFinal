@@ -17,13 +17,11 @@ class Texture{
 
     public:
         Texture(unsigned int ); //solo almacena la cantidad de texturas que tendra
-       // Texture(const char*, int);
+        // Texture(const char*, int);
         ~Texture();
         void setNumTextures(unsigned int);
         void loadTexture(char*,int);    //carga las texturas
         void Bind(int );    //bindTextures
-
-
 };
 
 
