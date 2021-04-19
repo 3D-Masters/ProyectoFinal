@@ -9,6 +9,7 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
     MyID = ID++;
 
     radious = 1.0f;
+    mass = 10.0f;
 
     posX = x;   posY = y;   posZ = z;
     dirX = dx;  dirY = dy;  dirZ = dz;
@@ -27,6 +28,7 @@ Carro::Carro():
     MyID = ID++;
 
     radious = 1.0f;
+    mass = 10.0f;
 
     posX = posY = posZ = 0;
     dirX = dirY = 0; dirZ = 1;
@@ -49,6 +51,8 @@ int Carro::getID(){return MyID;}
 
 float Carro::getRadious(){return radious;}
 void Carro::setRadious(float r){radious = r;}
+float Carro::getMass(){return mass;}
+void Carro::setMass(float m){mass = m;}
 
 void Carro::setPositionPoint(float x, float y, float z)
 {

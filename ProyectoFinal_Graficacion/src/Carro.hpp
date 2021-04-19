@@ -20,6 +20,7 @@ class Carro
         int MyID;
 
         float radious;
+        float mass;
 
         float posX,posY,posZ;   // pos = position
         float dirX,dirY,dirZ;   // dir = direction
@@ -44,6 +45,8 @@ class Carro
         int getID();
         float getRadious();
         void setRadious(float);
+        float getMass();
+        void setMass(float);
         void setPositionPoint(float,float,float);
         void setPosX(float);
         void setPosY(float);

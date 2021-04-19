@@ -14,7 +14,7 @@
 #include "Model.hpp"
 #include "Muro.hpp"
 
-#define NUM_SPHERES 3
+#define NUM_KARTS 5
 
 class Scene
 {
@@ -22,8 +22,8 @@ class Scene
         std::chrono::steady_clock::time_point start;
 
         Camara cam;
-        ModelX mx, mx2, mx3;
-        Carro *karts[NUM_SPHERES];
+        ModelX mx, mx2, mx3, mx4, mx5;
+        Carro *karts[NUM_KARTS];
         Muro muro;
         //Piso piso;
 
