@@ -26,7 +26,7 @@ class Muro
         Muro();
         ~Muro();
 
-        BoundingSphere getBounds();
+        BoundingSphere* getBounds();
         void draw();
 };
 

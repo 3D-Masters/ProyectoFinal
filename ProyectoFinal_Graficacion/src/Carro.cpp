@@ -1,11 +1,19 @@
 #include "Carro.hpp"
 #include <iostream>
 
+int Carro::ID = 0;
+
 Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step, float rot):
     tex(TEXTURE_LIMIT)
 {
+    MyID = ID++;
+
+    radious = 1.0f;
+
     posX = x;   posY = y;   posZ = z;
     dirX = dx;  dirY = dy;  dirZ = dz;
+    velX = 0.0f; velZ = 0.0f;
+    accX = 0.0f; accZ = 0.0f;
     tX = x;   tY = y;   tZ = z;
     s_magnitude = step;
     r_magnitude = rot;
@@ -18,8 +26,14 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
 Carro::Carro():
     tex(TEXTURE_LIMIT)
 {
+    MyID = ID++;
+
+    radious = 1.0f;
+
     posX = posY = posZ = 0;
     dirX = dirY = 0; dirZ = 1;
+    velX = 0.0f; velZ = 0.0f;
+    accX = 0.0f; accZ = 0.0f;
     s_magnitude = 1.0f;
     r_magnitude = 2.5f;
 
@@ -37,6 +51,11 @@ void Carro::initTextures()
 {
     texFilename[0] = "res/default.bmp";
 }
+
+int Carro::getID(){return MyID;}
+
+float Carro::getRadious(){return radious;}
+void Carro::setRadious(float r){radious = r;}
 
 void Carro::setPositionPoint(float x, float y, float z)
 {
@@ -61,12 +80,28 @@ void Carro::setDirZ(float dz){dirZ = dz; updateDirectionAngle(); updateDirection
 float Carro::getDirX(){return dirX;}
 float Carro::getDirY(){return dirY;}
 float Carro::getDirZ(){return dirZ;}
+void Carro::setVelocity(float vx, float vz)
+{
+    velX = vx;  velZ = vz;
+}
+void Carro::setVelX(float vx){velX = vx;}
+void Carro::setVelZ(float vz){velZ = vz;}
+float Carro::getVelX(){return velX;}
+float Carro::getVelZ(){return velZ;}
+void Carro::setAcceleration(float ax, float az)
+{
+    accX = ax;  accZ = az;
+}
+void Carro::setAccX(float ax){accX = ax;}
+void Carro::setAccZ(float az){accZ = az;}
+float Carro::getAccX(){return accX;}
+float Carro::getAccZ(){return accZ;}
 void Carro::setStepMagnitude(float m){s_magnitude = m;}
 float Carro::getStepMagnitude(){return s_magnitude;}
 void Carro::setRotMagnitude(float m){r_magnitude = m;}
 float Carro::getRotMagnitude(){return r_magnitude;}
 float Carro::getDirection(){return direction;}
-BoundingSphere Carro::getBounds(){return *boundingSphere;}
+BoundingSphere* Carro::getBounds(){return boundingSphere;}
 
 void Carro::handleCollisions(BoundingSphere* spheres, int sizeN)
 {
@@ -81,7 +116,7 @@ void Carro::handleCollisions(BoundingSphere* spheres, int sizeN)
             if(BoundingSphere::isWall(value))
             {
                 moveRewind();
-                std::cout << "Collision with Wall" << std::endl;
+                //std::cout << "Collision with Wall" << std::endl;
             }
             else if(BoundingSphere::isKart(value))
             {
@@ -92,24 +127,16 @@ void Carro::handleCollisions(BoundingSphere* spheres, int sizeN)
     }
 }
 
-//The following should only be executed if isColliding is false
-//if(!isColliding)
-void Carro::moveForward()
+void Carro::accelerateForward()
 {
-    tX = posX; tY = posY; tZ = posZ;
-
-    posX += (s_magnitude * dirX);
-    posY += (s_magnitude * dirY);
-    posZ += (s_magnitude * dirZ);
+    accX = s_magnitude * dirX;
+    accZ = s_magnitude * dirZ;
 }
 
-void Carro::moveBackward()
+void Carro::accelerateBackward()
 {
-    tX = posX; tY = posY; tZ = posZ;
-
-    posX -= (s_magnitude * dirX);
-    posY -= (s_magnitude * dirY);
-    posZ -= (s_magnitude * dirZ);
+    accX = - s_magnitude * dirX;
+    accZ = - s_magnitude * dirZ;
 }
 
 void Carro::moveRight()

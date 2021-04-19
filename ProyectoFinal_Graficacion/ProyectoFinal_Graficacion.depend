@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1618718005 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\main.cpp
+1618797345 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\main.cpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -7,9 +7,9 @@
 	<math.h>
 	<GL/glut.h>
 	<stdlib.h>
-	"src/Camara.hpp"
-	"src/Muro.hpp"
-	"src/BoundingSphere.hpp"
+	<chrono>
+	<cstdlib>
+	"src/Scene.hpp"
 
 1426374928 c:\program files\codeblocks\mingw\include\gl\glut.h
 	"freeglut_std.h"
@@ -25,11 +25,11 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1618717705 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.cpp
+1618798068 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.cpp
 	"Carro.hpp"
 	<iostream>
 
-1618717665 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.hpp
+1618798074 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.hpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	"GL/glut.h"
@@ -985,11 +985,11 @@
 1618414996 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\util\utilities.cpp
 	"Utilities.hpp"
 
-1618695964 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\boundingsphere.hpp
+1618790194 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\boundingsphere.hpp
 	"../util/Utilities.hpp"
 	<iostream>
 
-1618690841 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\boundingsphere.cpp
+1618781530 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\boundingsphere.cpp
 	"BoundingSphere.hpp"
 
 1618450903 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\util\utilities.hpp
@@ -1063,14 +1063,31 @@
 1618712561 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\texture.cpp
 	"Texture.hpp"
 
-1618722073 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.hpp
+1618787552 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.hpp
 	"GL/glut.h"
 	"BoundingSphere.hpp"
 	"Texture.hpp"
 	"../util/Utilities.hpp"
 	<cmath>
 
-1618721545 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.cpp
+1618787574 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.cpp
 	"Muro.hpp"
 	<iostream>
+
+1618797513 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.hpp
+	<GL/glut.h>
+	<iostream>
+	<cmath>
+	<ctime>
+	<vector>
+	<chrono>
+	"../util/Utilities.hpp"
+	"BoundingSphere.hpp"
+	"Camara.hpp"
+	"Carro.hpp"
+	"Model.hpp"
+	"Muro.hpp"
+
+1618801102 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.cpp
+	"Scene.hpp"
 

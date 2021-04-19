@@ -23,9 +23,9 @@ Muro::~Muro()
     delete collider;
 }
 
-BoundingSphere Muro::getBounds()
+BoundingSphere* Muro::getBounds()
 {
-    return *collider;
+    return collider;
 }
 
 void Muro::draw()
