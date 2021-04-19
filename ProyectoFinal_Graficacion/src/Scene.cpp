@@ -136,6 +136,7 @@ void Scene::updateMovement()
 
     for(int i = 0; i < NUM_SPHERES; i++)
     {
+
         karts[i]->setVelocity(
             karts[i]->getVelX()+karts[i]->getAccX(),
             karts[i]->getVelZ()+karts[i]->getAccZ()
@@ -147,29 +148,19 @@ void Scene::updateMovement()
             karts[i]->getPosZ()+karts[i]->getVelZ()
         );
 
-        if(i == 0)
-        {
-            std::cout << "Position: " << karts[i]->getPosX() << " " << karts[i]->getPosZ() << std::endl;
-            std::cout << "Velocity: " << karts[i]->getVelX() << " " << karts[i]->getVelZ() << std::endl;
-            std::cout << "Acceleration: " << karts[i]->getAccX() << " " << karts[i]->getAccX() << std::endl;
-        }
-
         karts[i]->setAcceleration(
             -karts[i]->getVelX()*0.015,
             -karts[i]->getVelZ()*0.015
         );
 
-        float vX = karts[i]->getVelX(), vZ = karts[i]->getVelZ();
-
-        if(fabs(vX*vX + vZ*vZ) < 0.001f)
-            karts[i]->setVelocity(0,0);
-
-        float magnitude = sqrt(vX*vX + vZ*vZ);
-        if(vX*vX + vZ*vZ >= karts[i]->getStepMagnitude())
+        float magnitude = sqrt(karts[i]->getVelX()*karts[i]->getVelX() + karts[i]->getVelZ()*karts[i]->getVelZ());
+        if(magnitude >= karts[i]->getStepMagnitude())
+        {
             karts[i]->setVelocity(
                 karts[i]->getVelX()/magnitude,
                 karts[i]->getVelZ()/magnitude
             );
+        }
     }
 }
 
@@ -217,15 +208,15 @@ void Scene::handleCollisions()
                     overlapZ = overlap * (current->getPosZ() - target->getPosZ()) / distance;
 
                     current->setPositionPoint(
-                        current->getPosX() - overlapX,
+                        current->getPosX() + overlapX,
                         current->getPosY(),
-                        current->getPosZ() - overlapZ
+                        current->getPosZ() + overlapZ
                     );
 
                     target->setPositionPoint(
-                        target->getPosX() + overlapX,
+                        target->getPosX() - overlapX,
                         target->getPosY(),
-                        target->getPosZ() + overlapZ
+                        target->getPosZ() - overlapZ
                     );
                 }
             }
