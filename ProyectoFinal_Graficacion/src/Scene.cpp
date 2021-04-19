@@ -6,6 +6,8 @@ Scene::Scene():
     karts[0] = &mx;
     karts[1] = &mx2;
     karts[2] = &mx3;
+    karts[3] = &mx4;
+    karts[4] = &mx5;
 
     for(int i = 0; i < 4; i++)
         arrows[i] = false;
@@ -27,13 +29,13 @@ void Scene::init()
 
     mx3.setDirectionVector(0,0,1);
     mx3.setPositionPoint(-30,0,0);
-    /*
+
     mx4.setDirectionVector(0,0,1);
     mx4.setPositionPoint(0,0,30);
 
     mx5.setDirectionVector(0,0,1);
     mx5.setPositionPoint(0,0,-30);
-    */
+
     cam.display();
 }
 
@@ -99,20 +101,20 @@ void Scene::updateOthers()
 
         mx2.setDirectionVector(a,0,c);
         mx3.setDirectionVector(b,0,d);
-        //mx4.setDirectionVector(c,0,e);
-        //mx5.setDirectionVector(d,0,a);
+        mx4.setDirectionVector(c,0,e);
+        mx5.setDirectionVector(d,0,a);
 
         mx2.accelerateBackward();
         mx3.accelerateBackward();
-        //mx4.moveBackward();
-        //mx5.moveBackward();
+        mx4.accelerateBackward();
+        mx5.accelerateBackward();
     }
     else
     {
         mx2.accelerateForward();
         mx3.accelerateForward();
-        //mx4.moveForward();
-        //mx5.moveForward();
+        mx4.accelerateForward();
+        mx5.accelerateForward();
     }
 }
 
@@ -134,7 +136,7 @@ void Scene::updateMovement()
     // NPC movement
     updateOthers();
 
-    for(int i = 0; i < NUM_SPHERES; i++)
+    for(int i = 0; i < NUM_KARTS; i++)
     {
 
         karts[i]->setVelocity(
@@ -171,19 +173,18 @@ void Scene::handleCollisions()
     Carro* current;
     Carro* target;
 
-    float mass = 10.0f;
-    float wallMass = 50.0f;
-
     float distance;
     float overlap, overlapX, overlapZ;
+
+    float nx, nz, kx, kz, momentum;
 
     std::vector<std::pair<Carro*,Carro*>> parDeColision;
     std::vector<Carro*> colisionConMuro;
 
-    for(int i = 0; i < NUM_SPHERES; i++)
+    for(int i = 0; i < NUM_KARTS; i++)
     {
         current = karts[i];
-        for(int j = 0; j < NUM_SPHERES; j++)
+        for(int j = 0; j < NUM_KARTS; j++)
         {
             target = karts[j];
             if(current->getID() != target->getID())
@@ -263,21 +264,18 @@ void Scene::handleCollisions()
             target->getPosZ()
         );
 
-        float nx = (target->getPosX() - current->getPosX()) / distance;
-        float nz = (target->getPosZ() - current->getPosZ()) / distance;
+        nx = (target->getPosX() - current->getPosX()) / distance;
+        nz = (target->getPosZ() - current->getPosZ()) / distance;
 
-        float kx = (current->getVelX() - target->getVelX());
-        float kz = (current->getVelZ() - target->getVelZ());
-        float p = 2.0 * (nx * kx + nz * kz) / (mass + mass);
+        kx = (current->getVelX() - target->getVelX());
+        kz = (current->getVelZ() - target->getVelZ());
+        momentum = 2.0 * (nx * kx + nz * kz) / (current->getMass() + target->getMass());
 
-        float offsetX = p*mass*nx;
-        float offsetZ = p*mass*nz;
+        current->setVelX(current->getVelX() - momentum*target->getMass()*nx);
+        current->setVelZ(current->getVelZ() - momentum*target->getMass()*nz);
 
-        current->setVelX(current->getVelX() - offsetX);
-        current->setVelZ(current->getVelZ() - offsetZ);
-
-        target->setVelX(target->getVelX() + offsetX);
-        target->setVelZ(target->getVelZ() + offsetZ);
+        target->setVelX(target->getVelX() + momentum*current->getMass()*nx);
+        target->setVelZ(target->getVelZ() + momentum*current->getMass()*nz);
     }
 
     // Dynamic collision between karts and wall
@@ -294,15 +292,15 @@ void Scene::handleCollisions()
             muro.getZ()
         );
 
-        float nx = (muro.getX() - current->getPosX()) / distance;
-        float nz = (muro.getZ() - current->getPosZ()) / distance;
+        nx = (muro.getX() - current->getPosX()) / distance;
+        nz = (muro.getZ() - current->getPosZ()) / distance;
 
-        float kx = current->getVelX();
-        float kz = current->getVelZ();
-        float p = 2.0 * (nx * kx + nz * kz) / (mass + wallMass);
+        kx = current->getVelX();
+        kz = current->getVelZ();
+        momentum = 2.0 * (nx * kx + nz * kz) / (current->getMass());
 
-        current->setVelX(current->getVelX() - p*wallMass*nx);
-        current->setVelZ(current->getVelZ() - p*wallMass*nz);
+        current->setVelX(current->getVelX() - momentum*current->getMass()*nx);
+        current->setVelZ(current->getVelZ() - momentum*current->getMass()*nz);
     }
 }
 
@@ -333,9 +331,8 @@ void Scene::draw()
 
     glPopMatrix();
 
-    mx.draw();
-    mx2.draw();
-    mx3.draw();
+    for(int i = 0; i < NUM_KARTS; i++)
+        karts[i]->draw();
 
     glPopMatrix();
 

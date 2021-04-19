@@ -13,12 +13,12 @@
 
 #include <cstdlib>
 
-#define WIDTH 1280
-#define HEIGHT 720
-
 #include "src/Scene.hpp"
 
 using namespace std;
+
+float WIDTH = 1280;
+float HEIGHT = 720;
 
 float FOVY=60.0;
 float ZNEAR=0.01;
@@ -65,15 +65,9 @@ void drawAxis()
 */
 void init()
 {
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(FOVY,(float)WIDTH/HEIGHT,ZNEAR,ZFAR);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    //texturas
+
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
     glShadeModel(GL_FLAT);
-
     glEnable(GL_DEPTH_TEST);
 
     escena.init();
@@ -81,6 +75,16 @@ void init()
     glutIgnoreKeyRepeat(true);
 }
 
+void resize(int width, int height)
+{
+    WIDTH = width; HEIGHT = height;
+    glViewport(0, 0, WIDTH, HEIGHT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(FOVY,(float)WIDTH/HEIGHT,ZNEAR,ZFAR);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
 
 void display()
 {
@@ -113,15 +117,19 @@ void SpecialUpInput(int key, int x, int y)
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowPosition(10, 10);
     glutInitWindowSize(WIDTH,HEIGHT);
-    glutCreateWindow("Solar System");
+    glutInitWindowPosition(10, 10);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutCreateWindow("Proyecto final: Carro chocones");
+
     init();
+
+    glutReshapeFunc(resize);
     glutDisplayFunc(display);
     glutIdleFunc(display);
     glutSpecialFunc(SpecialInput);
     glutSpecialUpFunc(SpecialUpInput);
+
     glutMainLoop();
 
     return 0;
