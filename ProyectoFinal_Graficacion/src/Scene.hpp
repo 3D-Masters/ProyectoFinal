@@ -14,21 +14,22 @@
 #include "Model.hpp"
 #include "Muro.hpp"
 
-#define NUM_KARTS 5
+#define NUM_KARTS 6
 
 class Scene
 {
     private:
         std::chrono::steady_clock::time_point start;
-
+        float angle;
         Camara cam;
-        ModelX mx, mx2, mx3, mx4, mx5;
+        ModelX mx, mx2, mx3, mx4, mx5, mx6;
         Carro *karts[NUM_KARTS];
         Muro muro;
         //Piso piso;
 
         bool arrows[4];
 
+        void attack(ModelX*, ModelX*);//could also belong to Carro
         void updateOthers();
         void updateMovement();
         void handleCollisions();

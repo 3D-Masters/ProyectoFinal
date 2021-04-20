@@ -8,11 +8,13 @@ Scene::Scene():
     karts[2] = &mx3;
     karts[3] = &mx4;
     karts[4] = &mx5;
+    karts[5] = &mx6;
 
     for(int i = 0; i < 4; i++)
         arrows[i] = false;
 
     start = std::chrono::steady_clock::now();
+    angle = 0.0f;
 }
 
 Scene::~Scene(){}
@@ -35,6 +37,9 @@ void Scene::init()
 
     mx5.setDirectionVector(0,0,1);
     mx5.setPositionPoint(0,0,-30);
+
+    mx6.setDirectionVector(0,0,1);
+    mx6.setPositionPoint(0,0,15);
 
     cam.display();
 }
@@ -77,46 +82,70 @@ void Scene::inputReleased(int key, int x, int y)
 
 void Scene::updateOthers()
 {
-    auto end = std::chrono::steady_clock::now();
+    //El kart2 ataca al jugador (mx)
+    attack(&mx2,&mx);
 
-    int elapsed_time = int(std::chrono::duration_cast <std::chrono::seconds>(end - start).count());
-    float divisor =  1.0f; //std::rand() % 11;
-    float a, b, c, d , e;
-
-    //std::cout << elapsed_time << std::endl;
-
-    if((elapsed_time % 2) == 0)
+    //El kart3 "vigila" una circunferencia y si se acerca
+    //una cierta distancia el jugador, ataca
+    float safeDistance = 20.0f;
+    float distance = Util::pointDistance(mx3.getPosX(),
+                                         mx3.getPosY(),
+                                         mx3.getPosZ(),
+                                         mx.getPosX(),
+                                         mx.getPosY(),
+                                         mx.getPosZ());
+    if(distance - (mx3.getRadious() + mx.getRadious()) < safeDistance)
     {
-        a = std::rand() % 2;
-        b = std::rand() % 2;
-        c = std::rand() % 2;
-        d = std::rand() % 2;
-        e = std::rand() % 2;
-
-        a /= divisor;
-        b /= divisor;
-        c /= divisor;
-        d /= divisor;
-        e /= divisor;
-
-        mx2.setDirectionVector(a,0,c);
-        mx3.setDirectionVector(b,0,d);
-        mx4.setDirectionVector(c,0,e);
-        mx5.setDirectionVector(d,0,a);
-
-        mx2.accelerateBackward();
-        mx3.accelerateBackward();
-        mx4.accelerateBackward();
-        mx5.accelerateBackward();
+        attack(&mx3, &mx);
+        //std::cout << "mx is being attacked!" << std::endl;
     }
     else
     {
-        mx2.accelerateForward();
-        mx3.accelerateForward();
-        mx4.accelerateForward();
-        mx5.accelerateForward();
+        //mx3.setDirX(std::cos(step) * 2);
+        //mx3.setDirZ(std::sin(step) * 2);
+        //mx3.accelerateForward();
+        //circular motion
+        mx3.setPosX(mx3.getPosX() + (std::cos(angle)));// *5.0f)*0.1f);
+        mx3.setPosZ(mx3.getPosZ() + (std::sin(angle)));// *5.0f)*0.1f);
     }
+
+    //el kart4 ataca al kart2
+    attack(&mx4,&mx2);
+
+    //kart5 y kart6 se atacan entre elos
+    attack(&mx5,&mx6);
+    attack(&mx6,&mx5);
+
+    //según calcular valores muy grandes de sin o cos es costoso
+    if(angle >= 359.0f)
+        angle = 0.0f;
+    angle += 0.2f;
 }
+
+void Scene::attack(ModelX *enemy, ModelX *victim)
+{
+    auto end = std::chrono::steady_clock::now();
+    int elapsed_time = int(std::chrono::duration_cast <std::chrono::seconds>(end - start).count());
+    //nuevo vector de direccionamiento para enemigo
+
+    float dirX = victim->getPosX() - enemy->getPosX();
+    float dirZ = victim->getPosZ() - enemy->getPosZ();
+
+
+    //normalizacion del vector
+    float hyp = std::sqrt((dirX * dirX) + (dirZ * dirZ));
+    dirX /= hyp;
+    dirZ /= hyp;
+
+    //actualizando posicion del enemigo
+    enemy->setDirX(dirX);
+    enemy->setDirZ(dirZ);
+
+    //acelarcion cada 3 segundos por 1 segundo
+    if(elapsed_time % 3 == 0)
+        enemy->accelerateForward();
+}
+
 
 void Scene::updateMovement()
 {
