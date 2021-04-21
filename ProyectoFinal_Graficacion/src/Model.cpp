@@ -36,7 +36,7 @@ void ModelX::drawBase()
         glVertex3f(0.5f, 0.15f, -1.0f);
         glVertex3f(0.5f, 0.15f, 1.0f);
 	//Left
-        tex.Bind(); //bind Texture 0
+        //tex.Bind(); //bind Texture 0
 
         glNormal3f(-1.0f, 0.0f, 0.0f);
         glTexCoord2f(0.0f,0.0f);        glVertex3f(0.5f, -0.15f, -1.0f);
@@ -258,7 +258,7 @@ void ModelY::drawBase()
         glVertex3f(0.5f, 0.15f, -1.0f);
         glVertex3f(0.5f, 0.15f, 1.0f);
 	//Left
-        tex.Bind(); //bind Texture 0
+        //tex.Bind(); //bind Texture 0
 
         glNormal3f(-1.0f, 0.0f, 0.0f);
         glTexCoord2f(0.0f,0.0f);        glVertex3f(0.5f, -0.15f, -1.0f);
@@ -385,7 +385,7 @@ void ModelY::drawUp()
         glVertex3f(0.4,0.45,-0.7);
         glVertex3f(0.4,0.45,0.7);
     //left
-        tex.Bind();
+        //tex.Bind();
 
         glTexCoord2f(0.0f,0.0f);
         glNormal3f(-1.0f,0.0f,0.0f);
@@ -400,7 +400,7 @@ void ModelY::drawUp()
         glVertex3f(0.4f,0.45f,-0.7);
         glVertex3f(-0.3,0.45f,-0.7);
     //top
-        tex.Bind();
+        //tex.Bind();
         glTexCoord2f(0.0f,0.0f);
         glNormal3f(0.0f,1.0f,0.0f);
         glVertex3f(-0.3f,0.45f,0.7f);

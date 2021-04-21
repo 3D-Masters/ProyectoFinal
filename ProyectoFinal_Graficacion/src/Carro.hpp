@@ -26,7 +26,6 @@ class Carro
         float dirX,dirY,dirZ;   // dir = direction
         float velX,     velZ;   // vel = velocity
         float accX,     accZ;   // acc = acceleration
-        float tX,tY,tZ;         // temporal position
         float direction;        // angle of direction
         float s_magnitude;      // step magnitude
         float r_magnitude;      // rotation magnitude
@@ -83,7 +82,6 @@ class Carro
         virtual void accelerateBackward();    // Función especial para mover al objeto
         virtual void moveRight();       // Función especial para mover al objeto
         virtual void moveLeft();        // Función especial para mover al objeto
-        virtual void moveRewind();      // Función especial para rebobinar movimiento
 
         // Maybe some "actions", for instante, "explode" or something XD
 };

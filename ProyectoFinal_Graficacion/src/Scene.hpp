@@ -13,6 +13,7 @@
 #include "Carro.hpp"
 #include "Model.hpp"
 #include "Muro.hpp"
+#include "Piso.hpp"
 
 #define NUM_KARTS 6
 
@@ -26,7 +27,7 @@ class Scene
         ModelY my,my2;
         Carro *karts[NUM_KARTS];
         Muro muro;
-        //Piso piso;
+        Piso piso;
 
         bool arrows[4];
 

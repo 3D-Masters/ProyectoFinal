@@ -29,15 +29,16 @@ void Muro::draw()
     tex.loadTexture(texFilename);
 
     glEnable(GL_TEXTURE_2D);
+    //tex.Bind(2);
     glPushMatrix();
-    glTranslatef(x,0.0f,z);
+    glTranslatef(x,y,z);
     glBegin(GL_QUAD_STRIP);
         for(int i = 0; i <= WALL_RES; i++)
         {
             glTexCoord2f(delta*i,1.0f);
             glVertex3f(points[i%WALL_RES][0],WALL_HEIGHT,points[i%WALL_RES][1]);
             glTexCoord2f(delta*i,0.0f);
-            glVertex3f(points[i%WALL_RES][0], 0.0f      ,points[i%WALL_RES][1]);
+            glVertex3f(points[i%WALL_RES][0],          y,points[i%WALL_RES][1]);
         }
     glEnd();
     glPopMatrix();

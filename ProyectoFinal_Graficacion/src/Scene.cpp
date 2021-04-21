@@ -387,6 +387,7 @@ void Scene::draw()
     glPushMatrix();
 
     muro.draw();
+    piso.draw();
 
     glPopMatrix();
 

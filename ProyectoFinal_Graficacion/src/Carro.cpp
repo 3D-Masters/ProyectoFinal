@@ -15,7 +15,6 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
     dirX = dx;  dirY = dy;  dirZ = dz;
     velX = 0.0f; velZ = 0.0f;
     accX = 0.0f; accZ = 0.0f;
-    tX = x;   tY = y;   tZ = z;
     s_magnitude = step;
     r_magnitude = rot;
 
@@ -57,11 +56,10 @@ void Carro::setMass(float m){mass = m;}
 void Carro::setPositionPoint(float x, float y, float z)
 {
     posX = x;   posY = y;   posZ = z;
-    tX = x;   tY = y;   tZ = z;
 }
-void Carro::setPosX(float x){posX = x; tX = x;}
-void Carro::setPosY(float y){posY = y; tY = y;}
-void Carro::setPosZ(float z){posZ = z; tZ = z;}
+void Carro::setPosX(float x){posX = x;}
+void Carro::setPosY(float y){posY = y;}
+void Carro::setPosZ(float z){posZ = z;}
 float Carro::getPosX(){return posX;}
 float Carro::getPosY(){return posY;}
 float Carro::getPosZ(){return posZ;}
@@ -123,11 +121,6 @@ void Carro::moveLeft()
     direction -= r_magnitude;
     direction = (direction < 0.0f) ? direction+360.0f : direction;
     updateDirection();
-}
-
-void Carro::moveRewind()
-{
-    posX = tX; posY = tY; posZ = tZ;
 }
 
 void Carro::updateDirection()
