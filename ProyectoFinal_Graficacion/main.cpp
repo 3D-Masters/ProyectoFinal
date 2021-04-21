@@ -114,7 +114,7 @@ int main(int argc, char **argv)
     glutInitWindowSize(WIDTH,HEIGHT);
     glutInitWindowPosition(10, 10);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutCreateWindow("Proyecto final: Carro chocones");
+    glutCreateWindow("Proyecto final: Carros chocones");
 
     init();
 
