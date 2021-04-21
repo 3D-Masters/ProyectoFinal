@@ -26,7 +26,7 @@ float Muro::getRadious(){ return WALL_RAD; }
 void Muro::draw()
 {
     float delta = (float) WALL_TIMES / (float) WALL_RES;
-    tex.loadTexture(texFilename,0);
+    tex.loadTexture(texFilename);
 
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();

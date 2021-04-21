@@ -48,15 +48,16 @@
 	<GL/glut.h>
 	"../util/Utilities.hpp"
 
-1618700699 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\carro.cpp
+1618954136 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\carro.cpp
 	"Carro.hpp"
 	<iostream>
 
-1618450903 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\carro.hpp
+1618954136 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\carro.hpp
 	<GLUT/glut.h>
 	<GL/glut.h>
+	"GL/glut.h"
 	"../util/Utilities.hpp"
-	"BoundingSphere.hpp"
+	"Texture.hpp"
 
 1426374928 d:\program files\codeblocks\mingw\include\gl\glut.h
 	"freeglut_std.h"
@@ -72,7 +73,7 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1618702400 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\main.cpp
+1618954136 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\main.cpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -80,8 +81,9 @@
 	<math.h>
 	<GL/glut.h>
 	<stdlib.h>
-	"src/Camara.hpp"
-	"src/BoundingSphere.hpp"
+	<chrono>
+	<cstdlib>
+	"src/Scene.hpp"
 
 1426374928 d:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\gl\glut.h
 	"freeglut_std.h"
@@ -964,10 +966,10 @@
 1618450903 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\camara.cpp
 	"Camara.hpp"
 
-1618702646 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\model.cpp
+1618981309 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\model.cpp
 	"Model.hpp"
 
-1618702098 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\model.hpp
+1618981348 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\model.hpp
 	"Carro.hpp"
 	"Texture.hpp"
 
@@ -1009,7 +1011,7 @@
 	<windows.h>
 	"GL/gl.h"
 
-1618519021 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\rgbimage.hpp
+1618868847 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\rgbimage.hpp
 	<stdio.h>
 	<assert.h>
 
@@ -1037,10 +1039,10 @@
 	<crtdefs.h>
 	<stdlib.h>
 
-1618700736 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\texture.cpp
+1618981839 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\texture.cpp
 	"Texture.hpp"
 
-1618702190 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\texture.hpp
+1618981820 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\texture.hpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	"RgbImage.hpp"
@@ -1086,5 +1088,31 @@
 	"Muro.hpp"
 
 1618864708 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.cpp
+	"Scene.hpp"
+
+1618981751 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\scene.hpp
+	<GL/glut.h>
+	<iostream>
+	<cmath>
+	<ctime>
+	<vector>
+	<chrono>
+	"../util/Utilities.hpp"
+	"Camara.hpp"
+	"Carro.hpp"
+	"Model.hpp"
+	"Muro.hpp"
+
+1618954136 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\muro.hpp
+	"GL/glut.h"
+	"Texture.hpp"
+	"../util/Utilities.hpp"
+	<cmath>
+
+1618980948 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\muro.cpp
+	"Muro.hpp"
+	<iostream>
+
+1618981783 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\scene.cpp
 	"Scene.hpp"
 

@@ -1,31 +1,28 @@
 #include "Texture.hpp"
 
 
-
 Texture::Texture(unsigned int cant)
 {
     NTextures = cant;
     //filename[0] = "RedLeavesTexture.bmp";
-    texture = new GLuint[NTextures];
 }
 Texture::~Texture()
 {
-    delete [] texture;
+    glDeleteTextures(1,&texture);
 }
 void Texture::setNumTextures(unsigned int cant)
 {
     NTextures = cant;
 }
-void Texture::loadTexture(char* filename, int index)
+void Texture::loadTexture(char* filename)
 {
-//pasar nomArchivo, index y cantidad de texturas
 
     glClearColor(0.0,0.0,0.0,0.0);
     glShadeModel(GL_FLAT);
 
     RgbImage theTexMap( filename );
 
-    glGenTextures(1,&texture[index]);
+    glGenTextures(1,&texture);
 
     //controla texture wrapping
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -39,9 +36,7 @@ void Texture::loadTexture(char* filename, int index)
 
     theTexMap.Reset();
 }
-void Texture::Bind(int index)
+void Texture::Bind()
 {
-    glBindTexture(GL_TEXTURE_2D,texture[index]);
+    glBindTexture(GL_TEXTURE_2D,texture);
 }
-
-

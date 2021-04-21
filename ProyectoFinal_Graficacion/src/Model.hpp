@@ -8,6 +8,7 @@ class ModelX:public Carro
     private:
         void drawBase();
         void drawUp();
+        void drawRueda();
         void initTextures();
     public:
         float ang;
@@ -19,6 +20,11 @@ class ModelX:public Carro
 };
 class ModelY:public Carro
 {
+    private:
+        void drawBase();
+        void drawUp();
+        void drawRueda();
+        void initTextures();
     public:
         ModelY();
         ~ModelY();

@@ -22,7 +22,8 @@ class Scene
         std::chrono::steady_clock::time_point start;
         float angle;
         Camara cam;
-        ModelX mx, mx2, mx3, mx4, mx5, mx6;
+        ModelX mx, mx2, mx3, mx4/*, mx5, mx6*/;
+        ModelY my,my2;
         Carro *karts[NUM_KARTS];
         Muro muro;
         //Piso piso;
@@ -30,6 +31,7 @@ class Scene
         bool arrows[4];
 
         void attack(ModelX*, ModelX*);//could also belong to Carro
+        void attack(ModelY*,ModelY*);
         void updateOthers();
         void updateMovement();
         void handleCollisions();

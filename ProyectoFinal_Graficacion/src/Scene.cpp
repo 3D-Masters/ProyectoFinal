@@ -7,8 +7,10 @@ Scene::Scene():
     karts[1] = &mx2;
     karts[2] = &mx3;
     karts[3] = &mx4;
-    karts[4] = &mx5;
-    karts[5] = &mx6;
+    /*karts[4] = &mx5;
+    karts[5] = &mx6;*/
+    karts[4] = &my;
+    karts[5] = &my2;
 
     for(int i = 0; i < 4; i++)
         arrows[i] = false;
@@ -35,11 +37,14 @@ void Scene::init()
     mx4.setDirectionVector(0,0,1);
     mx4.setPositionPoint(0,0,30);
 
-    mx5.setDirectionVector(0,0,1);
-    mx5.setPositionPoint(0,0,-30);
-
-    mx6.setDirectionVector(0,0,1);
-    mx6.setPositionPoint(0,0,15);
+    /*mx5.setDirectionVector(0,0,1);
+    mx5.setPositionPoint(0,0,-30);*/
+    my.setDirectionVector(0,0,1);
+    my.setPositionPoint(0,0,-30);
+    /*mx6.setDirectionVector(0,0,1);
+    mx6.setPositionPoint(0,0,15);*/
+    my2.setDirectionVector(0,0,1);
+    my2.setPositionPoint(0,0,15);
 
     cam.display();
 }
@@ -113,8 +118,10 @@ void Scene::updateOthers()
     attack(&mx4,&mx2);
 
     //kart5 y kart6 se atacan entre elos
-    attack(&mx5,&mx6);
-    attack(&mx6,&mx5);
+    /*attack(&mx5,&mx6);
+    attack(&mx6,&mx5);*/
+    attack(&my,&my2);
+    attack(&my2,&my);
 
     //según calcular valores muy grandes de sin o cos es costoso
     if(angle >= 359.0f)
@@ -123,6 +130,29 @@ void Scene::updateOthers()
 }
 
 void Scene::attack(ModelX *enemy, ModelX *victim)
+{
+    auto end = std::chrono::steady_clock::now();
+    int elapsed_time = int(std::chrono::duration_cast <std::chrono::seconds>(end - start).count());
+    //nuevo vector de direccionamiento para enemigo
+
+    float dirX = victim->getPosX() - enemy->getPosX();
+    float dirZ = victim->getPosZ() - enemy->getPosZ();
+
+
+    //normalizacion del vector
+    float hyp = std::sqrt((dirX * dirX) + (dirZ * dirZ));
+    dirX /= hyp;
+    dirZ /= hyp;
+
+    //actualizando posicion del enemigo
+    enemy->setDirX(dirX);
+    enemy->setDirZ(dirZ);
+
+    //acelarcion cada 3 segundos por 1 segundo
+    if(elapsed_time % 3 == 0)
+        enemy->accelerateForward();
+}
+void Scene::attack(ModelY *enemy,ModelY *victim)
 {
     auto end = std::chrono::steady_clock::now();
     int elapsed_time = int(std::chrono::duration_cast <std::chrono::seconds>(end - start).count());
