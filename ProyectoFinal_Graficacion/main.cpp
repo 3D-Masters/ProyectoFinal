@@ -22,7 +22,9 @@ float HEIGHT = 720;
 
 float FOVY=60.0;
 float ZNEAR=0.01;
-float ZFAR=150.0;
+float ZFAR=120.0;
+
+bool fullscreen = false;
 
 Scene escena;
 
@@ -37,32 +39,6 @@ void drawPlane()
     glEnd();
 }
 
-/*
-void drawAxis()
-{
-     //X axis in red
-     glBegin(GL_LINES);
-       glColor3f(1.0f,0.0f,0.0f);
-       glVertex3f(X_MIN,0.0,0.0);
-       glColor3f(1.0f,0.0f,0.0f);
-       glVertex3f(X_MAX,0.0,0.0);
-     glEnd();
-     //Y axis in green
-     glBegin(GL_LINES);
-       glColor3f(0.0f,1.0f,0.0f);
-       glVertex3f(0.0,Y_MIN,0.0);
-       glColor3f(0.0f,1.0f,0.0f);
-       glVertex3f(0.0,Y_MAX,0.0);
-     glEnd();
-     //Z axis in blue
-     glBegin(GL_LINES);
-       glColor3f(0.0f,0.0f,1.0f);
-       glVertex3f(0.0,0.0,Z_MIN);
-       glColor3f(0.0f,0.0f,1.0f);
-       glVertex3f(0.0,0.0,Z_MAX);
-     glEnd();
- }
-*/
 void init()
 {
 
@@ -94,9 +70,6 @@ void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //drawAxis();
-    //drawPlane();
-
     glPushMatrix();
 
     escena.display();
@@ -104,13 +77,30 @@ void display()
     glPopMatrix();
 
     glutSwapBuffers();
+}
 
-    //Sleep(10);
+void KeyboardInput(unsigned char key, int x, int y)
+{
+    switch(key)
+    {
+        case 27: exit(0);
+    }
 }
 
 void SpecialInput(int key, int x, int y)
 {
-    escena.inputPressed(key,x,y);
+    switch(key)
+    {
+        case GLUT_KEY_F11:
+            if(fullscreen)
+                glutReshapeWindow(1280,720);
+            else
+                glutFullScreen();
+            fullscreen = !fullscreen;
+            break;
+        default:
+            escena.inputPressed(key,x,y);
+    }
 }
 
 void SpecialUpInput(int key, int x, int y)
@@ -131,6 +121,7 @@ int main(int argc, char **argv)
     glutReshapeFunc(resize);
     glutDisplayFunc(display);
     glutIdleFunc(display);
+    glutKeyboardFunc(KeyboardInput);
     glutSpecialFunc(SpecialInput);
     glutSpecialUpFunc(SpecialUpInput);
 

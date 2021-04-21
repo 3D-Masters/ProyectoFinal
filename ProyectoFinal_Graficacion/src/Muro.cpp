@@ -1,5 +1,4 @@
 #include "Muro.hpp"
-#include <iostream>
 
 Muro::Muro(): tex(1)
 {

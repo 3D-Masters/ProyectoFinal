@@ -24,11 +24,11 @@ void Scene::init()
     Carro::setTimer(start);
 
     mx.setPositionPoint(0,mx.getPosY(),0);
-    mx2.setPositionPoint(30,mx2.getPosY(),0);
-    mx3.setPositionPoint(-30,mx3.getPosY(),0);
-    mx4.setPositionPoint(0,mx4.getPosY(),30);
-    my.setPositionPoint(0,my.getPosY(),-30);
-    my2.setPositionPoint(0,my2.getPosY(),15);
+    mx2.setPositionPoint(30,mx2.getPosY(),12);
+    mx3.setPositionPoint(-30,mx3.getPosY(),20);
+    mx4.setPositionPoint(12,mx4.getPosY(),30);
+    my.setPositionPoint(10,my.getPosY(),-30);
+    my2.setPositionPoint(30,my2.getPosY(),15);
 
     cam.display();
 }
@@ -309,6 +309,9 @@ void Scene::draw()
     glPushMatrix();
 
     glPushMatrix();
+
+    sky.set(mx.getPosX(),0,mx.getPosZ());
+    sky.draw();
 
     muro.draw();
     piso.draw();

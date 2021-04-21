@@ -9,6 +9,7 @@
 #include <chrono>
 
 #include "../util/Utilities.hpp"
+#include "SkyBox.hpp"
 #include "Camara.hpp"
 #include "Carro.hpp"
 #include "Model.hpp"
@@ -23,6 +24,7 @@ class Scene
         std::chrono::steady_clock::time_point start;
 
         float angle;
+        SkyBox sky;
         Camara cam;
         ModelX mx, mx2, mx3, mx4/*, mx5, mx6*/;
         ModelY my,my2;

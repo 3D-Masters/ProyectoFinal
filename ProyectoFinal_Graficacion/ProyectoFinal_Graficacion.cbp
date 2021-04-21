@@ -57,6 +57,8 @@
 		<Unit filename="src/RgbImage.hpp" />
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/Scene.hpp" />
+		<Unit filename="src/SkyBox.cpp" />
+		<Unit filename="src/SkyBox.hpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Texture.hpp" />
 		<Unit filename="util/Utilities.cpp" />

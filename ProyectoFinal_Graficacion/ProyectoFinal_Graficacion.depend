@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1619028211 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\main.cpp
+1619039962 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\main.cpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -1071,11 +1071,10 @@
 	"../util/Utilities.hpp"
 	<cmath>
 
-1619029550 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.cpp
+1619037579 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.cpp
 	"Muro.hpp"
-	<iostream>
 
-1619034701 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.hpp
+1619038534 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.hpp
 	<GL/glut.h>
 	<iostream>
 	<cmath>
@@ -1083,13 +1082,14 @@
 	<vector>
 	<chrono>
 	"../util/Utilities.hpp"
+	"SkyBox.hpp"
 	"Camara.hpp"
 	"Carro.hpp"
 	"Model.hpp"
 	"Muro.hpp"
 	"Piso.hpp"
 
-1619036261 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.cpp
+1619038628 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.cpp
 	"Scene.hpp"
 
 1618981751 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\scene.hpp
@@ -1124,4 +1124,11 @@
 
 1619029518 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\piso.cpp
 	"Piso.hpp"
+
+1619038895 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\skybox.hpp
+	"GL/glut.h"
+	"Texture.hpp"
+
+1619039081 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\skybox.cpp
+	"SkyBox.hpp"
 
