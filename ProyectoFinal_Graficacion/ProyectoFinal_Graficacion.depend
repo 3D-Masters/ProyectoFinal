@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1618865270 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\main.cpp
+1619028211 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\main.cpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -25,13 +25,14 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1618864290 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.cpp
+1619035174 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.cpp
 	"Carro.hpp"
 	<iostream>
 
-1618864121 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.hpp
+1619034948 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\carro.hpp
 	<GLUT/glut.h>
 	<GL/glut.h>
+	<chrono>
 	"GL/glut.h"
 	"../util/Utilities.hpp"
 	"Texture.hpp"
@@ -973,14 +974,14 @@
 	"Carro.hpp"
 	"Texture.hpp"
 
-1618715984 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\model.cpp
+1619027443 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\model.cpp
 	"Model.hpp"
 
-1618715913 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\model.hpp
+1619027014 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\model.hpp
 	"Carro.hpp"
 	"Texture.hpp"
 
-1618414996 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\util\utilities.hpp
+1619031856 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\util\utilities.hpp
 	<cmath>
 
 1618414996 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\util\utilities.cpp
@@ -1047,7 +1048,7 @@
 	<GL/glut.h>
 	"RgbImage.hpp"
 
-1618848390 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\texture.hpp
+1618983871 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\texture.hpp
 	<GLUT/glut.h>
 	<GL/glut.h>
 	"RgbImage.hpp"
@@ -1061,20 +1062,20 @@
 	<windows.h>
 	"GL/gl.h"
 
-1618712561 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\texture.cpp
+1618983871 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\texture.cpp
 	"Texture.hpp"
 
-1618855624 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.hpp
+1619032792 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.hpp
 	"GL/glut.h"
 	"Texture.hpp"
 	"../util/Utilities.hpp"
 	<cmath>
 
-1618855645 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.cpp
+1619029550 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\muro.cpp
 	"Muro.hpp"
 	<iostream>
 
-1618864735 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.hpp
+1619034701 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.hpp
 	<GL/glut.h>
 	<iostream>
 	<cmath>
@@ -1086,8 +1087,9 @@
 	"Carro.hpp"
 	"Model.hpp"
 	"Muro.hpp"
+	"Piso.hpp"
 
-1618864708 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.cpp
+1619036261 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\scene.cpp
 	"Scene.hpp"
 
 1618981751 d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\scene.hpp
@@ -1115,4 +1117,11 @@
 
 1618981783 source:d:\graficacion\proyectofinal\proyectofinal\proyectofinal_graficacion\src\scene.cpp
 	"Scene.hpp"
+
+1619032677 c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\piso.hpp
+	"GL/glut.h"
+	"Texture.hpp"
+
+1619029518 source:c:\users\alex\google drive\school stuff\universidad\semestre 6\graficación\proyecto final\proyectofinal\proyectofinal_graficacion\src\piso.cpp
+	"Piso.hpp"
 

@@ -32,6 +32,7 @@ void Muro::draw()
     //tex.Bind(2);
     glPushMatrix();
     glTranslatef(x,y,z);
+    glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_QUAD_STRIP);
         for(int i = 0; i <= WALL_RES; i++)
         {

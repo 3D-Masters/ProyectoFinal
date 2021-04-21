@@ -4,7 +4,8 @@
 #include "GL/glut.h"
 #include "Texture.hpp"
 
-#define FLOOR_RAD 75.0f
+#define FLOOR_RAD 50.0f
+#define FLOOR_REPEAT 5
 
 class Piso
 {

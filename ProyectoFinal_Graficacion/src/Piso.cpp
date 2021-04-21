@@ -29,12 +29,13 @@ void Piso::draw()
 
     glTranslatef(x,y,z);
 
+    glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_QUADS);
-        glTexCoord2f(30,0);
+        glTexCoord2f(FLOOR_REPEAT,0);
         glVertex3f(points[0][0],y,points[0][1]);
-        glTexCoord2f(30,30);
+        glTexCoord2f(FLOOR_REPEAT,FLOOR_REPEAT);
         glVertex3f(points[1][0],y,points[1][1]);
-        glTexCoord2f(0,30);
+        glTexCoord2f(0,FLOOR_REPEAT);
         glVertex3f(points[2][0],y,points[2][1]);
         glTexCoord2f(0,0);
         glVertex3f(points[3][0],y,points[3][1]);

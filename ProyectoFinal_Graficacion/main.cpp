@@ -66,7 +66,11 @@ void drawAxis()
 void init()
 {
 
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+    glPolygonMode(GL_FRONT,GL_FILL);
+
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+
     glShadeModel(GL_FLAT);
     glEnable(GL_DEPTH_TEST);
 

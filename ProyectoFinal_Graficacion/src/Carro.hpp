@@ -7,6 +7,8 @@
 #include <GL/glut.h>
 #endif
 
+#include <chrono>
+
 #include "GL/glut.h"
 #include "../util/Utilities.hpp"
 #include "Texture.hpp"
@@ -16,6 +18,7 @@
 class Carro
 {
     protected:
+        static std::chrono::steady_clock::time_point start;
         static int ID;
         int MyID;
 
@@ -34,6 +37,10 @@ class Carro
         Texture tex;
         virtual void initTextures();    // this must be initialized inside derived classes
 
+        void drawUp();
+        void drawBase();
+        void drawBottom();
+
         void updateDirectionAngle();
         void updateDirection();
     public:
@@ -42,6 +49,7 @@ class Carro
         ~Carro();
 
         int getID();
+        static void setTimer(std::chrono::steady_clock::time_point);
         float getRadious();
         void setRadious(float);
         float getMass();
@@ -76,12 +84,12 @@ class Carro
         float getRotMagnitude();
         float getDirection();
 
-        virtual void draw() = 0;        // Función específica para dibujarlo
-        virtual void update() = 0;      // Esto es específico para las animaciones que tenga.
-        virtual void accelerateForward();     // Función especial para mover al objeto
-        virtual void accelerateBackward();    // Función especial para mover al objeto
-        virtual void moveRight();       // Función especial para mover al objeto
-        virtual void moveLeft();        // Función especial para mover al objeto
+        virtual void draw();                // Función específica para dibujarlo
+        virtual void accelerateForward();   // Función especial para mover al objeto
+        virtual void accelerateBackward();  // Función especial para mover al objeto
+        virtual void moveRight();           // Función especial para mover al objeto
+        virtual void moveLeft();            // Función especial para mover al objeto
+        virtual void attack(Carro*,int);    // Función que ataca al objetivo
 
         // Maybe some "actions", for instante, "explode" or something XD
 };

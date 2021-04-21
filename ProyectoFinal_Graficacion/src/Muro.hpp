@@ -7,9 +7,9 @@
 #include <cmath>
 
 #define WALL_RES 32
-#define WALL_HEIGHT 3.5f
-#define WALL_RAD 75.0f
-#define WALL_TIMES 8
+#define WALL_HEIGHT 6.5f
+#define WALL_RAD 50.0f
+#define WALL_TIMES 3
 
 class Muro
 {

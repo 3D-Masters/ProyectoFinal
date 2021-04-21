@@ -21,6 +21,7 @@ class Scene
 {
     private:
         std::chrono::steady_clock::time_point start;
+
         float angle;
         Camara cam;
         ModelX mx, mx2, mx3, mx4/*, mx5, mx6*/;
