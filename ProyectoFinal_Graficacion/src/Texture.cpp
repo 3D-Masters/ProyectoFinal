@@ -1,19 +1,13 @@
 #include "Texture.hpp"
 
 
-Texture::Texture(unsigned int cant)
-{
-    NTextures = cant;
-    //filename[0] = "RedLeavesTexture.bmp";
-}
+Texture::Texture(){}
+
 Texture::~Texture()
 {
     glDeleteTextures(1,&texture);
 }
-void Texture::setNumTextures(unsigned int cant)
-{
-    NTextures = cant;
-}
+
 void Texture::loadTexture(char* filename)
 {
 
@@ -36,7 +30,12 @@ void Texture::loadTexture(char* filename)
 
     theTexMap.Reset();
 }
-void Texture::Bind()
+void Texture::bind()
 {
     glBindTexture(GL_TEXTURE_2D,texture);
+}
+
+void Texture::unbind()
+{
+    glBindTexture(GL_TEXTURE_2D,0);
 }

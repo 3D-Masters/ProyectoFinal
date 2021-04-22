@@ -1,6 +1,6 @@
 #include "Muro.hpp"
 
-Muro::Muro(): tex(1)
+Muro::Muro()
 {
     float step = (float) 360.0f / (float) WALL_RES;
     x = y = z = 0.0f;
@@ -28,11 +28,11 @@ void Muro::draw()
     tex.loadTexture(texFilename);
 
     glEnable(GL_TEXTURE_2D);
-    //tex.Bind(2);
     glPushMatrix();
     glTranslatef(x,y,z);
     glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_QUAD_STRIP);
+        tex.bind();
         for(int i = 0; i <= WALL_RES; i++)
         {
             glTexCoord2f(delta*i,1.0f);
@@ -40,6 +40,7 @@ void Muro::draw()
             glTexCoord2f(delta*i,0.0f);
             glVertex3f(points[i%WALL_RES][0],          y,points[i%WALL_RES][1]);
         }
+        tex.unbind();
     glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);

@@ -1,6 +1,6 @@
 #include "Piso.hpp"
 
-Piso::Piso(): tex(1)
+Piso::Piso()
 {
     x = y = z = 0.0f;
 
@@ -24,13 +24,13 @@ void Piso::draw()
     tex.loadTexture(texFilename);
 
     glEnable(GL_TEXTURE_2D);
-    //tex.Bind(1);
     glPushMatrix();
 
     glTranslatef(x,y,z);
 
     glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_QUADS);
+        tex.bind();
         glTexCoord2f(FLOOR_REPEAT,0);
         glVertex3f(points[0][0],y,points[0][1]);
         glTexCoord2f(FLOOR_REPEAT,FLOOR_REPEAT);
@@ -39,6 +39,7 @@ void Piso::draw()
         glVertex3f(points[2][0],y,points[2][1]);
         glTexCoord2f(0,0);
         glVertex3f(points[3][0],y,points[3][1]);
+        tex.unbind();
     glEnd();
 
     glPopMatrix();

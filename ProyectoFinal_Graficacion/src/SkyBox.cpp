@@ -1,6 +1,6 @@
 #include "SkyBox.hpp"
 
-SkyBox::SkyBox(): tex(1)
+SkyBox::SkyBox()
 {
     x = y = z = 0;
 
@@ -37,6 +37,7 @@ void SkyBox::draw()
     glTranslatef(x,y,z);
     glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_QUAD_STRIP);
+        tex.bind();
         for(int i = 0; i < 5; i++)
         {
             glTexCoord2f(0.0f+i,0.0f);
@@ -44,6 +45,7 @@ void SkyBox::draw()
             glTexCoord2f(0.0f+i,1.0f);
             glVertex3f(points[i%4][0],            0,points[i%4][1]);
         }
+        tex.unbind();
     glEnd();
 
     glPopMatrix();

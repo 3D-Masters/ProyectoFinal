@@ -4,8 +4,7 @@
 int Carro::ID = 0;
 std::chrono::steady_clock::time_point Carro::start = std::chrono::steady_clock::now();
 
-Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step, float rot):
-    tex(TEXTURE_LIMIT)
+Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step, float rot)
 {
     MyID = ID++;
 
@@ -22,8 +21,7 @@ Carro::Carro(float x, float y, float z, float dx, float dy, float dz, float step
     updateDirectionAngle();
 }
 
-Carro::Carro():
-    tex(TEXTURE_LIMIT)
+Carro::Carro()
 {
     MyID = ID++;
 
@@ -56,6 +54,7 @@ void Carro::drawUp()
     glBegin(GL_QUADS);
 
     //front
+        tex.bind();
         glNormal3f(0.0f,0.0f,1.0f);
 
         glTexCoord2f(0.0f,0.0f);
@@ -71,7 +70,6 @@ void Carro::drawUp()
         glVertex3f(-0.3,0.45,0.7);
 
     //Left
-
         glNormal3f(1.0f,0.0f,0.0f);
 
         glTexCoord2f(0.0f,0.0f);
@@ -86,8 +84,6 @@ void Carro::drawUp()
         glTexCoord2f(0.0f,1.0f);
         glVertex3f(0.3,0.45,0.7);
     //Right
-        //tex.Bind();
-
         glNormal3f(-1.0f,0.0f,0.0f);
 
         glTexCoord2f(0.0,0.0);
@@ -118,7 +114,6 @@ void Carro::drawUp()
         glVertex3f(0.3f,0.45f,-0.7);
 
     //top
-        //tex.Bind();
         glNormal3f(0.0f,1.0f,0.0f);
 
         glTexCoord2f(0.0f,0.0f);
@@ -132,7 +127,7 @@ void Carro::drawUp()
 
         glTexCoord2f(0.0f,1.0f);
         glVertex3f(-0.3f,0.45f,-0.7f);
-
+        tex.unbind();
     glEnd();
     glPopMatrix();
 
@@ -149,6 +144,7 @@ void Carro::drawBase()
     glBegin(GL_QUADS);
 
     //front
+        tex.bind();
         glNormal3f(0.0f, 0.0f, 1.0f);
 
         glTexCoord2f(0.5f,1.0f);
@@ -179,8 +175,6 @@ void Carro::drawBase()
         glVertex3f(0.5f, 0.15f, 1.0f);
 
 	//Back
-        //tex.Bind(); //bind Texture 0
-
         glNormal3f(-1.0f, 0.0f, 0.0f);
 
         glTexCoord2f(0.0f,0.0f);
@@ -209,7 +203,7 @@ void Carro::drawBase()
 
         glTexCoord2f(0.5f,0.0f);
         glVertex3f(-0.5f, -0.15f, 1.0f);
-
+        tex.unbind();
 	glEnd();
     glPopMatrix();
 
@@ -312,7 +306,6 @@ void Carro::drawBottom()
         glVertex3f(-0.5f,-0.30f,-1.0f);
         glVertex3f(-0.5f,-0.30f,1.0f);
         glVertex3f(-0.5f,-0.25f,1.5f);
-
     glEnd();
     glShadeModel(GL_FLAT);
     glPopMatrix();

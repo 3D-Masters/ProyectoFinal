@@ -10,17 +10,14 @@
 #include "RgbImage.hpp"
 /*SE CREA UN OBJETO TEXTURA PARA CADA FIGURA */
 class Texture{
-   private:
-        int NTextures;
+    private:
         GLuint texture;
-
     public:
-        Texture(unsigned int ); //solo almacena la cantidad de texturas que tendra
+        Texture();
         ~Texture();
-        void setNumTextures(unsigned int);
         void loadTexture(char*);    //carga las texturas
-        void Bind();    //bindTextures
+        void bind();    //bindTextures
+        void unbind();  //unbindTextures
 };
-
 
 #endif // TEXTURE_HPP_INCLUDED
