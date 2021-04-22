@@ -187,10 +187,10 @@ void Scene::handleCollisions()
                 {
                     parDeColision.push_back({current,target});
 
-                    // Calculate displacement required
+                    // Calculate distance to move of the overlap
                     overlap = 0.5f * (distance - current->getRadious() + target->getRadious());
 
-                    // Displace Current Ball away from collision
+                    // Move circles to a safe position
                     overlapX = overlap * (current->getPosX() - target->getPosX()) / distance;
                     overlapZ = overlap * (current->getPosZ() - target->getPosZ()) / distance;
 
@@ -221,10 +221,10 @@ void Scene::handleCollisions()
         {
             colisionConMuro.push_back(current);
 
-            // Calculate displacement required
+            // Calculate overlap between wall and circle
             overlap = current->getRadious() + distance - muro.getRadious();
 
-            // Displace Current Ball away from collision
+            // Move circle to a safe place
             current->setPositionPoint(
                 current->getPosX() - overlap * (current->getPosX() - muro.getX()) / distance,
                 current->getPosY(),
