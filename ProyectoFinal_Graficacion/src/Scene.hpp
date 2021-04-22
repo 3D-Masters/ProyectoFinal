@@ -26,7 +26,7 @@ class Scene
         float angle;
         SkyBox sky;
         Camara cam;
-        ModelX mx, mx2, mx3, mx4/*, mx5, mx6*/;
+        ModelX mx, mx2, mx3, mx4;
         ModelY my,my2;
         Carro *karts[NUM_KARTS];
         Muro muro;
@@ -34,8 +34,6 @@ class Scene
 
         bool arrows[4];
 
-        void attack(ModelX*, ModelX*);//could also belong to Carro
-        void attack(ModelY*,ModelY*);
         void updateOthers();
         void updateMovement();
         void handleCollisions();
